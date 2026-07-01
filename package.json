@@ -1,6 +1,6 @@
 {
   "name": "jallynme-skills",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "private": true,
   "description": "Jeremy's agent skills — an S-grade solo-founder venture kit (project-genesis) plus hooks and workflow skills. Install with: npx skills@latest add jallynme/skills",
   "keywords": [

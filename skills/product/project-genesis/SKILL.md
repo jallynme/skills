@@ -1,7 +1,7 @@
 ---
 name: project-genesis
 description: >-
-  Turn a folder of raw business documents into a complete, delivery-ready spec set — then a domain-specialist skill — on repeat. Use this whenever the user drops a pile of domain docs into a new project folder and wants the full pipeline run: extract knowledge to a FigJam/knowledge board, draw diagrams (context/flow/ERD/state), build a bilingual domain dictionary, design a Prisma data model, produce HTML wireframes, write an SDLC roadmap spec, generate a Scrum backlog (epics → stories → acceptance criteria → test cases), run a multi-role review loop until there are no gaps/bugs, and finally generate a reusable "<domain>-specialist.md" skill. Triggers: "new project", "I made a folder PROJECT_NAME with docs", "extract knowledge from these docs", "run the workflow / the whole pipeline", "build the spec / backlog / schema / wireframes", "make a domain specialist skill", "run the genesis pipeline for X", "loop review until clean". Works for ANY business domain — it spawns a domain specialist for whatever the project is.
+  Turn a folder of raw business documents into a complete, delivery-ready spec set — then a domain-specialist skill — on repeat. Use this whenever the user drops a pile of domain docs into a new project folder and wants the full pipeline run: extract knowledge to a FigJam/knowledge board, draw diagrams (context/flow/ERD/state), build a bilingual domain dictionary, design a Prisma data model, produce 1-page HTML wireframes (Tailwind + shadcn style, no React/TS), write an SDLC roadmap spec, generate a Scrum backlog (epics → stories → acceptance criteria → test cases), run a multi-role review loop until there are no gaps/bugs, generate a humanized CEO executive-summary one-pager (HTML with diagram + roadmap + status), and finally generate a reusable "<domain>-specialist.md" skill. Triggers: "new project", "I made a folder PROJECT_NAME with docs", "extract knowledge from these docs", "run the workflow / the whole pipeline", "build the spec / backlog / schema / wireframes", "make a domain specialist skill", "write an executive summary / CEO one-pager", "run the genesis pipeline for X", "loop review until clean". Works for ANY business domain — it spawns a domain specialist for whatever the project is.
 ---
 
 # Project Genesis — raw docs → full blueprint → domain specialist, on repeat
@@ -47,9 +47,10 @@ machine runs for any domain.
 | Knowledge board | **FigJam** (Figma MCP `generate_diagram` / `get_figjam`) | Miro, a Markdown knowledge index |
 | Diagrams | **Mermaid** in Markdown, or **FigJam** | draw.io, PlantUML, Figma |
 | Data model | **Prisma** (`schema.prisma`, PostgreSQL) | raw SQL DDL, DBML, Drizzle |
-| Wireframes | **single-file HTML, shadcn style** | Figma Make, v0, Penpot |
+| Wireframes | **1-page HTML per surface — Tailwind (CDN) + shadcn-style tokens, plain HTML, no React/TS** | Figma Make, v0, Penpot |
 | Backlog cards | **Markdown story cards** (10-section template) | Jira, Linear, Notion, GitHub Issues |
 | Specialist | **a Skill (`SKILL.md`)** | a plain `<domain>-expert.md` brief |
+| Executive summary | **1-page HTML CEO briefing** (Tailwind + Mermaid, humanized, visualized) | Google Slides, `pptx`, a Notion doc |
 
 Pick the default unless the user names another. If a connector for the swap exists (Figma, Notion,
 Linear, GitHub…), search for it and offer it; otherwise produce the Markdown/HTML equivalent.
@@ -62,8 +63,10 @@ This skill runs more than a spec factory — it runs a **venture**. Three additi
 
 - **Founder bookends.** Before Station 1, run **V · Validate** (problem/customer, market, business
   model, pricing/WTP, assumption register, **GO/NO-GO** gate — `template/V_VALIDATE/`). After Station
-  9, run **M · Monetize/Launch** (pricing tiers, unit economics, financial model, GTM, metrics tree,
-  **LAUNCH** gate — `template/M_MONETIZE/`). **Do not build before a GO.** NO-GO is a win.
+  9, run **E · Executive Summary** (a humanized, visualized CEO one-pager in HTML —
+  `template/E_EXEC_SUMMARY/`) then **M · Monetize/Launch** (pricing tiers, unit economics, financial
+  model, GTM, metrics tree, **LAUNCH** gate — `template/M_MONETIZE/`). **Do not build before a GO.**
+  NO-GO is a win. Refresh **E** at every version bump — it's the required brief into the M gate.
 - **Agent swarm (your virtual C-suite).** Don't review with generic roles — dispatch the **full roster**
   (detailed in §0.6 below; briefs in `agents/`): **Orchestrator, Red-Team, CFO, CMO, Competitor
   Analyst, CPO, CTO, Counsel, Data, QA**, + as-needed **Sales, Design, People**, + the per-project
@@ -174,9 +177,13 @@ live in `prompts/STATION_PROMPTS.md`; the deep rationale lives in `PROJECT_GENES
 
 ### Station 5 — Wireframes
 - **Input:** flows + schema + dictionary.
-- **Action:** build **single-file HTML wireframes, shadcn style**, for each surface the product needs
-  (e.g. customer app + admin portal). Cover the core flows end-to-end; use real dictionary terms and
-  realistic sample data. Keep i18n in mind (TH/EN or whatever the source languages are).
+- **Action:** build a **1-page HTML wireframe per surface** (e.g. customer app + admin portal +
+  mobile). Each is **one self-contained `.html` file** — **Tailwind via the Play CDN + shadcn-style
+  design tokens**, **plain HTML only (no React, no JSX, no TypeScript, no build step)**; a little
+  vanilla `<script>` for screen switching is fine. Copy `template/05_WIREFRAMES/_starter.html` (it
+  ships the tokens + a screen router + list/detail/create scaffolding). Cover the core flows
+  end-to-end; use real dictionary terms and realistic sample data. Keep i18n in mind (whatever the
+  source languages are).
 - **Output:** `05_WIREFRAMES/<surface>.html` (one file per surface).
 - **Gate:** every core flow is click-through-able in the wireframe; each major entity has create /
   list / detail screens; an interface-completeness check passes (no flow dead-ends).
@@ -230,6 +237,22 @@ live in `prompts/STATION_PROMPTS.md`; the deep rationale lives in `PROJECT_GENES
 - **Output:** `09_SPECIALIST/<domain>-specialist/SKILL.md` (+ optional `.skill` package).
 - **Gate:** the specialist can answer the domain's top-10 questions from its own body and correctly
   flags the project's known edge cases; it's added to the panel for future rounds.
+
+### Station E — Executive Summary (CEO one-pager, HTML) — *bookend, after 9 / before M*
+- **Input:** everything so far, but especially `PROJECT_STATE.md`, `06_SDLC/SDLC_MASTER_SPEC.md`,
+  `_EVAL/SCORECARD.md`, and `M_MONETIZE/METRICS_TREE.md`.
+- **Action:** write `E_EXEC_SUMMARY/EXECUTIVE_SUMMARY.html` from
+  `template/E_EXEC_SUMMARY/EXECUTIVE_SUMMARY.html` — **one self-contained HTML page**, same stack as
+  the wireframes (**Tailwind CDN + shadcn tokens, plain HTML, no React/TS**) plus **Mermaid** for the
+  diagram. It must be **humanized** (lead with the story: problem → who → why now → what we built →
+  the proof number → the ask) and **best-visualized**: KPI cards, a **roadmap timeline** (phase
+  status), a **status board** (working / in-flight / risks & asks), and **one at-a-glance diagram**.
+  Lead **CPO + CMO**; invoke the **`product-management:stakeholder-update`** and
+  **`product-management:roadmap-update`** skills for the narrative/roadmap and **`frontend-design`**
+  so it doesn't read as templated. Every number traces to a source file. **Refresh it every version.**
+- **Output:** `E_EXEC_SUMMARY/EXECUTIVE_SUMMARY.html`.
+- **Gate:** a non-technical reader gets *what we're building, where we are, what we need* in under two
+  minutes; every number traces to a source; it prints clean. Required input to the **M** gate.
 
 ---
 

@@ -1,0 +1,173 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title><PROJECT_NAME> — <SURFACE> wireframe</title>
+
+<!--
+  STATION 5 WIREFRAME STARTER — copy this to <surface>.html (customer.html / admin.html / mobile.html).
+  Rules (keep them):
+    • ONE self-contained .html file per surface. No build step. Opens straight in a browser.
+    • Styling = Tailwind (Play CDN) + shadcn-style design tokens (the CSS variables below).
+    • PLAIN HTML ONLY — no React, no JSX, no TypeScript, no framework. Vanilla <script> is fine
+      for tab/nav switching and mock interactions.
+    • Use REAL terms from 03_DICTIONARY and realistic sample data — never lorem ipsum.
+    • Walk every core flow from 02_DIAGRAMS/flows.md end-to-end (no dead-ends). Each major entity
+      in 04_DATA_MODEL/schema.prisma gets create / list / detail screens.
+    • i18n in mind (all source languages); a11y baseline (labels, focus states, semantic tags).
+    • For mobile.html: wrap screens in a ~390px phone frame; native bottom tab bar; show
+      offline / loading / empty / permission states.
+-->
+
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  // shadcn-style tokens wired into Tailwind so `bg-background`, `text-foreground`, `border-border`,
+  // `bg-primary`, `bg-muted`, `rounded-lg` etc. behave like the shadcn/ui defaults.
+  tailwind.config = {
+    darkMode: 'class',
+    theme: { extend: {
+      colors: {
+        border: 'hsl(var(--border))', input: 'hsl(var(--input))', ring: 'hsl(var(--ring))',
+        background: 'hsl(var(--background))', foreground: 'hsl(var(--foreground))',
+        primary: { DEFAULT: 'hsl(var(--primary))', foreground: 'hsl(var(--primary-foreground))' },
+        secondary: { DEFAULT: 'hsl(var(--secondary))', foreground: 'hsl(var(--secondary-foreground))' },
+        muted: { DEFAULT: 'hsl(var(--muted))', foreground: 'hsl(var(--muted-foreground))' },
+        accent: { DEFAULT: 'hsl(var(--accent))', foreground: 'hsl(var(--accent-foreground))' },
+        destructive: { DEFAULT: 'hsl(var(--destructive))', foreground: 'hsl(var(--destructive-foreground))' },
+        card: { DEFAULT: 'hsl(var(--card))', foreground: 'hsl(var(--card-foreground))' },
+      },
+      borderRadius: { lg: 'var(--radius)', md: 'calc(var(--radius) - 2px)', sm: 'calc(var(--radius) - 4px)' },
+    }},
+  }
+</script>
+<style>
+  /* shadcn/ui "default" theme tokens (light + dark). Tweak per brand in PROJECT_STATE. */
+  :root{
+    --background:0 0% 100%; --foreground:240 10% 3.9%;
+    --card:0 0% 100%; --card-foreground:240 10% 3.9%;
+    --primary:240 5.9% 10%; --primary-foreground:0 0% 98%;
+    --secondary:240 4.8% 95.9%; --secondary-foreground:240 5.9% 10%;
+    --muted:240 4.8% 95.9%; --muted-foreground:240 3.8% 46.1%;
+    --accent:240 4.8% 95.9%; --accent-foreground:240 5.9% 10%;
+    --destructive:0 84.2% 60.2%; --destructive-foreground:0 0% 98%;
+    --border:240 5.9% 90%; --input:240 5.9% 90%; --ring:240 5.9% 10%;
+    --radius:0.5rem;
+  }
+  .dark{
+    --background:240 10% 3.9%; --foreground:0 0% 98%;
+    --card:240 10% 3.9%; --card-foreground:0 0% 98%;
+    --primary:0 0% 98%; --primary-foreground:240 5.9% 10%;
+    --secondary:240 3.7% 15.9%; --secondary-foreground:0 0% 98%;
+    --muted:240 3.7% 15.9%; --muted-foreground:240 5% 64.9%;
+    --accent:240 3.7% 15.9%; --accent-foreground:0 0% 98%;
+    --destructive:0 62.8% 30.6%; --destructive-foreground:0 0% 98%;
+    --border:240 3.7% 15.9%; --input:240 3.7% 15.9%; --ring:240 4.9% 83.9%;
+  }
+  body{font-family:ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+</style>
+</head>
+
+<body class="bg-background text-foreground antialiased">
+<div class="min-h-screen flex flex-col">
+
+  <!-- Top bar -->
+  <header class="border-b border-border sticky top-0 z-10 bg-background/80 backdrop-blur">
+    <div class="mx-auto max-w-6xl px-4 h-14 flex items-center gap-4">
+      <div class="font-semibold tracking-tight"><PROJECT_NAME></div>
+      <nav class="hidden sm:flex items-center gap-1 text-sm" id="nav">
+        <!-- one button per core screen; wire to showScreen() -->
+        <button onclick="showScreen('list')" class="px-3 py-1.5 rounded-md hover:bg-muted">List</button>
+        <button onclick="showScreen('detail')" class="px-3 py-1.5 rounded-md hover:bg-muted"><ENTITY> detail</button>
+        <button onclick="showScreen('create')" class="px-3 py-1.5 rounded-md hover:bg-muted">Create <ENTITY></button>
+      </nav>
+      <button onclick="document.documentElement.classList.toggle('dark')"
+              class="ml-auto text-sm px-3 py-1.5 rounded-md border border-border hover:bg-muted">◐ Theme</button>
+    </div>
+  </header>
+
+  <!-- Screens: each core flow step is a <section data-screen>; showScreen() toggles them -->
+  <main class="mx-auto max-w-6xl w-full px-4 py-8 flex-1">
+
+    <!-- LIST screen -->
+    <section data-screen="list">
+      <div class="flex items-center justify-between mb-4">
+        <div>
+          <h1 class="text-2xl font-semibold tracking-tight"><ENTITY> list</h1>
+          <p class="text-sm text-muted-foreground">Real sample data from the dictionary — no lorem ipsum.</p>
+        </div>
+        <button onclick="showScreen('create')"
+                class="bg-primary text-primary-foreground text-sm font-medium px-4 py-2 rounded-md hover:opacity-90">
+          + New <ENTITY>
+        </button>
+      </div>
+      <div class="rounded-lg border border-border overflow-hidden">
+        <table class="w-full text-sm">
+          <thead class="bg-muted/50 text-muted-foreground">
+            <tr><th class="text-left font-medium px-4 py-2.5"><FIELD_1></th>
+                <th class="text-left font-medium px-4 py-2.5"><FIELD_2></th>
+                <th class="text-left font-medium px-4 py-2.5">Status</th>
+                <th class="px-4 py-2.5"></th></tr>
+          </thead>
+          <tbody>
+            <tr class="border-t border-border hover:bg-muted/40">
+              <td class="px-4 py-2.5"><sample value></td>
+              <td class="px-4 py-2.5"><sample value></td>
+              <td class="px-4 py-2.5"><span class="inline-flex items-center rounded-full bg-secondary text-secondary-foreground px-2 py-0.5 text-xs"><STATUS></span></td>
+              <td class="px-4 py-2.5 text-right"><button onclick="showScreen('detail')" class="text-sm underline underline-offset-4">Open</button></td>
+            </tr>
+            <!-- …more rows… -->
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- DETAIL screen -->
+    <section data-screen="detail" hidden>
+      <button onclick="showScreen('list')" class="text-sm text-muted-foreground mb-3">← Back to list</button>
+      <div class="grid gap-6 md:grid-cols-3">
+        <div class="md:col-span-2 rounded-lg border border-border bg-card p-6">
+          <h1 class="text-2xl font-semibold tracking-tight"><ENTITY> · <sample id></h1>
+          <dl class="mt-4 grid grid-cols-2 gap-4 text-sm">
+            <div><dt class="text-muted-foreground"><FIELD_1></dt><dd><sample value></dd></div>
+            <div><dt class="text-muted-foreground"><FIELD_2></dt><dd><sample value></dd></div>
+          </dl>
+        </div>
+        <aside class="rounded-lg border border-border bg-card p-6">
+          <h2 class="font-medium mb-2">Actions</h2>
+          <button class="w-full bg-primary text-primary-foreground text-sm font-medium px-4 py-2 rounded-md mb-2"><PRIMARY_ACTION></button>
+          <button class="w-full border border-border text-sm px-4 py-2 rounded-md">Edit</button>
+        </aside>
+      </div>
+    </section>
+
+    <!-- CREATE screen -->
+    <section data-screen="create" hidden>
+      <button onclick="showScreen('list')" class="text-sm text-muted-foreground mb-3">← Cancel</button>
+      <h1 class="text-2xl font-semibold tracking-tight mb-4">Create <ENTITY></h1>
+      <form class="max-w-lg space-y-4 rounded-lg border border-border bg-card p-6" onsubmit="event.preventDefault();showScreen('detail')">
+        <div>
+          <label class="block text-sm font-medium mb-1.5" for="f1"><FIELD_1></label>
+          <input id="f1" class="w-full rounded-md border border-input bg-background px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-ring" placeholder="<hint>"/>
+        </div>
+        <div>
+          <label class="block text-sm font-medium mb-1.5" for="f2"><FIELD_2></label>
+          <input id="f2" class="w-full rounded-md border border-input bg-background px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-ring" placeholder="<hint>"/>
+        </div>
+        <button class="bg-primary text-primary-foreground text-sm font-medium px-4 py-2 rounded-md">Save <ENTITY></button>
+      </form>
+    </section>
+
+  </main>
+</div>
+
+<script>
+  // Minimal vanilla screen router — no framework. Each core flow step is a [data-screen] section.
+  function showScreen(name){
+    document.querySelectorAll('[data-screen]').forEach(s => s.hidden = (s.dataset.screen !== name));
+    window.scrollTo(0,0);
+  }
+  showScreen('list');
+</script>
+</body>
+</html>

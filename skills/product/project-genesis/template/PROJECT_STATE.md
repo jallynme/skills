@@ -24,6 +24,7 @@
 | 7 | Backlog | ⬜ todo | — | `07_BACKLOG/` | ⬜ | |
 | 8 | Review loop | ⬜ todo | — | `08_REVIEW/REVIEW_LOG.md` | ⬜ | |
 | 9 | Specialist skill | ⬜ todo | — | `09_SPECIALIST/<domain>-specialist/SKILL.md` | ⬜ | |
+| **E** | **Executive Summary (CEO one-pager)** | ⬜ todo | — | `E_EXEC_SUMMARY/EXECUTIVE_SUMMARY.html` | ⬜ | **refresh every version · input to M** |
 | **M** | **Monetize/Launch (GO/HOLD)** | ⬜ todo | — | `M_MONETIZE/GTM_AND_MODEL.md` + `METRICS_TREE.md` | ⬜ | **founder gate — before launch** |
 
 Status legend: ⬜ todo · 🟨 in progress · ✅ gate met · 🔁 re-opened by review

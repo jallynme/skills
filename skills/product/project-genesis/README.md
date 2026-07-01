@@ -66,8 +66,10 @@ project-genesis-kit/
 │   ├── PROJECT_STATE.md               ← the loop tracker (status · version · gaps · score · 🎯 goal · trace)
 │   ├── V_VALIDATE/                    ← ⭐ validate + competitor set (catalog·profiles·benchmark·matrix) + feature map
 │   ├── 00_INTAKE/ … 09_SPECIALIST/    ← one folder per build station, each with its template
+│   ├── 05_WIREFRAMES/_starter.html    ← ⭐ 1-page HTML wireframe starter (Tailwind + shadcn tokens, no React/TS)
 │   ├── 07_BACKLOG/TEMPLATE.md         ← the 10-section story-card template
 │   ├── 08_REVIEW/REDTEAM_PREMORTEM.md ← the red-team / pre-mortem log
+│   ├── E_EXEC_SUMMARY/                ← ⭐ CEO one-pager (HTML): story · KPIs · roadmap · status · diagram
 │   ├── M_MONETIZE/                    ← ⭐ GTM + financial model + metrics tree (the LAUNCH gate)
 │   ├── _EVAL/SCORECARD.md             ← A–S scores per round (the trend should climb)
 │   └── _EVAL/dashboard.html           ← ⭐ open in a browser: live loop dashboard from PROJECT_STATE
@@ -99,9 +101,10 @@ progress), and run **`scripts/lint.sh`** any time to verify kit integrity.
 
 ## Defaults (hybrid — swap any of them)
 
-FigJam (Figma) · Mermaid · **Prisma + PostgreSQL** · single-file **shadcn HTML** wireframes ·
-Markdown story cards · a Skill for the specialist. Each is swappable (Miro, draw.io, SQL/DBML, Figma
-Make, Jira/Linear/Notion…) — name the swap and the pipeline produces the equivalent.
+FigJam (Figma) · Mermaid · **Prisma + PostgreSQL** · **1-page HTML wireframes** (Tailwind CDN +
+shadcn-style tokens, plain HTML — no React/TS) · Markdown story cards · a Skill for the specialist ·
+a **CEO executive-summary one-pager** (HTML). Each is swappable (Miro, draw.io, SQL/DBML, Figma
+Make, Jira/Linear/Notion, Slides…) — name the swap and the pipeline produces the equivalent.
 
 ## What a populated run looks like
 

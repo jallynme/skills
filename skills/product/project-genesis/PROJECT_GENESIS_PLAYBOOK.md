@@ -175,13 +175,15 @@ copy-paste prompt for each is in `prompts/STATION_PROMPTS.md`.
 
 ### Station 5 — Wireframes
 - **Input:** flows + schema + dictionary.
-- **Action:** build **single-file HTML wireframes, shadcn style**, one per surface (e.g. customer app
-  + admin portal). Walk every core flow end-to-end; use real dictionary terms and realistic sample
-  data; design with i18n in mind.
+- **Action:** build a **1-page HTML wireframe per surface** (e.g. customer app + admin portal +
+  mobile). Each is **one self-contained `.html` file — Tailwind (Play CDN) + shadcn-style design
+  tokens, plain HTML only (no React, no JSX, no TypeScript, no build step)**; vanilla `<script>` for
+  screen switching is fine. Start from `template/05_WIREFRAMES/_starter.html`. Walk every core flow
+  end-to-end; use real dictionary terms and realistic sample data; design with i18n in mind.
 - **Output:** `05_WIREFRAMES/<surface>.html`.
 - **Exit gate:** every core flow clicks through; each major entity has create/list/detail screens; an
   **interface-completeness** pass finds no dead-ends.
-- **Tool:** HTML/shadcn → *swap:* Figma Make, v0, Penpot.
+- **Tool:** 1-page HTML (Tailwind + shadcn tokens, no React/TS) → *swap:* Figma Make, v0, Penpot.
 
 ### Station 6 — SDLC roadmap spec
 - **Input:** everything so far.
@@ -234,6 +236,22 @@ copy-paste prompt for each is in `prompts/STATION_PROMPTS.md`.
 - **Exit gate:** the specialist answers the domain's top-10 questions from its own body and correctly
   flags the project's known edge cases; it joins the panel for all future rounds.
 - **Tool:** Skill `SKILL.md` → *swap:* a plain `<domain>-expert.md` brief.
+
+### Station E — Executive Summary (the CEO one-pager, after 9 / before M)
+- **Input:** everything so far — especially `PROJECT_STATE.md`, `06_SDLC/SDLC_MASTER_SPEC.md`,
+  `_EVAL/SCORECARD.md`, `M_MONETIZE/METRICS_TREE.md`.
+- **Action:** lead **CPO + CMO** (attacked by **Red-Team**). Write
+  `E_EXEC_SUMMARY/EXECUTIVE_SUMMARY.html` from the template — **one self-contained HTML page** (same
+  stack as the wireframes: **Tailwind CDN + shadcn tokens, plain HTML, no React/TS**, plus **Mermaid**
+  for the diagram). Make it **humanized** (story-first: problem → who → why now → what we built → the
+  proof number → the ask) and **best-visualized** (KPI cards · a **roadmap timeline** with phase
+  status · a **status board** of working/in-flight/risks · **one at-a-glance diagram**). Invoke
+  **`product-management:stakeholder-update`** + **`product-management:roadmap-update`** for the
+  narrative/roadmap and **`frontend-design`** for the visual craft. Every number traces to a source.
+- **Output:** `E_EXEC_SUMMARY/EXECUTIVE_SUMMARY.html` (refreshed at every version bump).
+- **Exit gate:** a non-technical reader gets *what / where we are / what we need* in under two
+  minutes; every number traces to a source; it prints clean. Required input to the **M** gate.
+- **Tool:** 1-page HTML (Tailwind + Mermaid) → *swap:* Google Slides, `pptx`, a Notion doc.
 
 ### Station M — Monetize / Launch (the GO/HOLD gate, after the build)
 - **Input:** the built spec + a signed-off version.

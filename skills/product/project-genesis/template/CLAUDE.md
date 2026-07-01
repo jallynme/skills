@@ -25,6 +25,7 @@
 | `07_BACKLOG/` | 7 | Epics → stories → AC → TC (+ `BUILD_ORDER.md`) | Work + build order |
 | `08_REVIEW/REVIEW_LOG.md` | 8 | Multi-role review rounds + sign-off | Quality gate |
 | `09_SPECIALIST/` | 9 | The domain-specialist skill (`<domain>-specialist`) | Domain guardian |
+| `E_EXEC_SUMMARY/` | **E** | CEO one-pager (HTML): story · KPIs · roadmap · status · diagram | **CEO/investor brief (input to M)** |
 | `M_MONETIZE/` | **M** | GTM + financial model + metrics tree | **LAUNCH gate (before launch)** |
 | `08_REVIEW/REDTEAM_PREMORTEM.md` | 8 | Red-team / pre-mortem challenges per gate | Adversarial gate |
 | `_EVAL/SCORECARD.md` | — | A–S grade per round (target: A to advance, S to launch) | **Grade truth** |

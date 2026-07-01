@@ -65,6 +65,7 @@ The story cards, DoR/DoD, and review log use classic team roles. Here's how they
 | 7 Backlog | CPO/BA | CTO, QA, Domain Specialist | CPO |
 | 8 Review loop | Orchestrator | **whole panel + Red-Team** | **panel sign-off** |
 | 9 Specialist skill | Domain Specialist | CPO | Domain Specialist |
+| **E — Executive Summary** | CPO, CMO | Red-Team, CFO, Head of Design | CPO |
 | **M — Monetize/Launch** | CMO, CFO, Sales | Red-Team, Counsel, Head of Data | **You (launch)** |
 
 ## How to spawn the panel (agentic, in this environment)

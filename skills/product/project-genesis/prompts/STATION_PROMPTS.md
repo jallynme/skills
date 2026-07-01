@@ -79,12 +79,14 @@ sign-off. Do NOT invent fields the domain doesn't have — ask me if unsure.
 ## Station 5 — Wireframes
 ```
 Run Station 5 (Wireframes) for <PROJECT_NAME>.
-Build single-file HTML wireframes in shadcn style, one per surface (customer web app + admin portal +
-mobile app if mobile is a surface), in 05_WIREFRAMES/. For mobile use a phone viewport (~390px),
-native nav/tab bar, and show offline/loading/push-permission/empty states. Walk every core flow
-end-to-end using real dictionary terms and realistic sample data; design with i18n in mind.
+Build a 1-page HTML wireframe per surface (customer web app + admin portal + mobile app if mobile is
+a surface) in 05_WIREFRAMES/. Each is ONE self-contained .html file: Tailwind via the Play CDN +
+shadcn-style design tokens, PLAIN HTML ONLY — no React, no JSX, no TypeScript, no build step (vanilla
+<script> for screen switching is fine). Start from 05_WIREFRAMES/_starter.html. For mobile use a
+phone viewport (~390px), native nav/tab bar, and show offline/loading/push-permission/empty states.
+Walk every core flow end-to-end using real dictionary terms and realistic sample data; i18n in mind.
 GATE: every core flow clicks through; each major entity has create/list/detail screens; no flow
-dead-ends. Show me each surface.
+dead-ends; each file opens standalone in a browser. Show me each surface.
 ```
 
 ## Station 6 — SDLC roadmap spec
@@ -139,6 +141,22 @@ requirements are ambiguous, an output style, and an explicit "must-confirm / say
 Write a trigger-rich frontmatter description so it auto-activates on this domain. If I want an
 installable package, zip the folder as <domain>-specialist.skill.
 GATE: it answers the domain's top-10 questions from its own body and flags our known edge cases.
+```
+
+## Station E — Executive Summary (CEO one-pager, after 9 / before M)
+```
+Run Station E (Executive Summary) for <PROJECT_NAME>.
+Lead CPO + CMO; attacked by Red-Team. Write E_EXEC_SUMMARY/EXECUTIVE_SUMMARY.html from the template:
+ONE self-contained HTML page — Tailwind (CDN) + shadcn-style tokens, plain HTML (no React/TS), plus
+Mermaid for the diagram — that a CEO reads in under two minutes. Pull real numbers from
+PROJECT_STATE.md, 06_SDLC/SDLC_MASTER_SPEC.md, _EVAL/SCORECARD.md, M_MONETIZE/METRICS_TREE.md.
+Make it HUMANIZED (lead with the story: problem → who → why now → what we built → the proof number →
+the ask) and BEST-VISUALIZED (KPI cards · a roadmap timeline with phase status · a status board of
+working/in-flight/risks & asks · one at-a-glance diagram). Invoke the product-management:
+stakeholder-update + roadmap-update skills for the narrative/roadmap and frontend-design for the
+visual craft. Every number must trace to a source file. Refresh this at every version bump.
+GATE: a non-technical reader gets what/where/what-we-need in under two minutes; numbers trace to
+sources; it prints clean. It's a required input to the M gate. Show me the page.
 ```
 
 ## Station M — Monetize / Launch (GO/HOLD, after the build)

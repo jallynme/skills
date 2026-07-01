@@ -1,0 +1,179 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title><PROJECT_NAME> — Executive Summary</title>
+
+<!--
+  STATION E — CEO EXECUTIVE SUMMARY (one self-contained HTML page).
+  Purpose: the single page a CEO / founder / investor reads to understand the venture at a glance.
+  Rules (keep them):
+    • ONE self-contained .html file. No build step. Opens in a browser AND prints to a clean 1–2 pages.
+    • Tailwind (Play CDN) + shadcn-style tokens (same design language as the wireframes).
+    • HUMANIZED prose — write like a smart human briefing the CEO, not a status dump. Lead with the
+      story: what we're building, for whom, why now, where we are, what we need. Plain language.
+    • BEST-VISUALIZED — every section earns a visual: KPI cards, a roadmap timeline, a status board,
+      one diagram (Mermaid). Never a wall of text.
+    • Pull real numbers/status from PROJECT_STATE.md, 06_SDLC/SDLC_MASTER_SPEC.md, _EVAL/SCORECARD.md,
+      M_MONETIZE/METRICS_TREE.md. Every claim traces to a source (see the footer).
+    • Refresh this at every version bump; it is a required input to the M · Monetize/Launch gate.
+-->
+
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+<script>
+  tailwind.config = { darkMode:'class', theme:{ extend:{ colors:{
+    border:'hsl(var(--border))', background:'hsl(var(--background))', foreground:'hsl(var(--foreground))',
+    card:'hsl(var(--card))', muted:{DEFAULT:'hsl(var(--muted))',foreground:'hsl(var(--muted-foreground))'},
+    primary:{DEFAULT:'hsl(var(--primary))',foreground:'hsl(var(--primary-foreground))'},
+    accent:{DEFAULT:'hsl(var(--accent))',foreground:'hsl(var(--accent-foreground))'},
+  }, borderRadius:{lg:'var(--radius)',md:'calc(var(--radius) - 2px)'} }}}
+</script>
+<style>
+  :root{
+    --background:0 0% 100%; --foreground:240 10% 3.9%; --card:0 0% 100%;
+    --primary:240 5.9% 10%; --primary-foreground:0 0% 98%;
+    --muted:240 4.8% 95.9%; --muted-foreground:240 3.8% 46.1%;
+    --accent:240 4.8% 95.9%; --accent-foreground:240 5.9% 10%;
+    --border:240 5.9% 90%; --radius:0.75rem;
+    --ok:142 71% 45%; --warn:38 92% 50%; --todo:240 5% 65%; --risk:0 72% 51%;
+  }
+  .dark{
+    --background:240 10% 3.9%; --foreground:0 0% 98%; --card:240 10% 5.5%;
+    --primary:0 0% 98%; --primary-foreground:240 5.9% 10%;
+    --muted:240 3.7% 15.9%; --muted-foreground:240 5% 64.9%;
+    --accent:240 3.7% 15.9%; --accent-foreground:0 0% 98%; --border:240 3.7% 15.9%;
+  }
+  body{font-family:ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+  @media print{ .no-print{display:none!important} body{background:#fff} .card-el{break-inside:avoid} }
+</style>
+</head>
+
+<body class="bg-background text-foreground antialiased">
+<div class="mx-auto max-w-5xl px-5 py-8 print:py-0">
+
+  <!-- ── Header ─────────────────────────────────────────────────────────── -->
+  <header class="flex flex-wrap items-start justify-between gap-4 border-b border-border pb-6">
+    <div>
+      <div class="text-xs uppercase tracking-widest text-muted-foreground">Executive Summary</div>
+      <h1 class="text-3xl font-bold tracking-tight mt-1"><PROJECT_NAME></h1>
+      <p class="text-muted-foreground mt-1 max-w-xl"><ONE_LINE_WHAT_IT_IS — the product in a sentence a stranger gets.></p>
+    </div>
+    <div class="text-right text-sm">
+      <div class="inline-flex items-center gap-2 rounded-full bg-muted px-3 py-1">
+        <span class="font-semibold">Grade <GRADE></span><span class="text-muted-foreground">· <VERSION></span>
+      </div>
+      <div class="text-muted-foreground mt-2"><DATE> · Prepared for <CEO_NAME></div>
+      <button onclick="print()" class="no-print mt-2 text-xs px-3 py-1.5 rounded-md border border-border hover:bg-muted">⎙ Print / PDF</button>
+    </div>
+  </header>
+
+  <!-- ── The story (humanized) ──────────────────────────────────────────── -->
+  <section class="py-6 border-b border-border">
+    <h2 class="text-sm font-semibold uppercase tracking-wide text-muted-foreground mb-2">The story</h2>
+    <p class="text-lg leading-relaxed">
+      <TWO_TO_FOUR_SENTENCE_NARRATIVE — the problem, who has it, why now, what we built, and the one
+      number that proves it's working. Write it the way you'd say it out loud to the CEO.>
+    </p>
+    <div class="mt-4 grid gap-3 sm:grid-cols-3 text-sm">
+      <div><span class="text-muted-foreground">Who it's for</span><br><b><ICP></b></div>
+      <div><span class="text-muted-foreground">Why now</span><br><b><WEDGE / timing></b></div>
+      <div><span class="text-muted-foreground">The ask</span><br><b><what we need from the CEO — decision / $ / hire></b></div>
+    </div>
+  </section>
+
+  <!-- ── KPI cards ──────────────────────────────────────────────────────── -->
+  <section class="py-6 grid grid-cols-2 md:grid-cols-4 gap-3">
+    <div class="card-el rounded-lg border border-border bg-card p-4">
+      <div class="text-xs text-muted-foreground uppercase tracking-wide">North-Star</div>
+      <div class="text-2xl font-bold mt-1"><VALUE></div>
+      <div class="text-xs text-muted-foreground mt-1"><trend vs last period></div>
+    </div>
+    <div class="card-el rounded-lg border border-border bg-card p-4">
+      <div class="text-xs text-muted-foreground uppercase tracking-wide">Market (SOM)</div>
+      <div class="text-2xl font-bold mt-1"><VALUE></div>
+      <div class="text-xs text-muted-foreground mt-1"><TAM/SAM context></div>
+    </div>
+    <div class="card-el rounded-lg border border-border bg-card p-4">
+      <div class="text-xs text-muted-foreground uppercase tracking-wide">Current phase</div>
+      <div class="text-2xl font-bold mt-1"><PHASE_N></div>
+      <div class="text-xs text-muted-foreground mt-1"><% complete></div>
+    </div>
+    <div class="card-el rounded-lg border border-border bg-card p-4">
+      <div class="text-xs text-muted-foreground uppercase tracking-wide">Runway</div>
+      <div class="text-2xl font-bold mt-1"><VALUE></div>
+      <div class="text-xs text-muted-foreground mt-1"><burn / months></div>
+    </div>
+  </section>
+
+  <!-- ── Roadmap timeline ───────────────────────────────────────────────── -->
+  <section class="py-6 border-t border-border">
+    <h2 class="text-sm font-semibold uppercase tracking-wide text-muted-foreground mb-4">Roadmap &amp; where we are</h2>
+    <ol class="relative border-l-2 border-border ml-3 space-y-6">
+      <!-- One <li> per phase. dot color: ok = done, warn = in-progress, todo = upcoming. -->
+      <li class="ml-6">
+        <span class="absolute -left-[9px] w-4 h-4 rounded-full" style="background:hsl(var(--ok))"></span>
+        <div class="flex items-center gap-2"><b>Phase 0 · <NAME></b>
+          <span class="text-xs rounded-full px-2 py-0.5" style="background:hsl(var(--ok)/.15);color:hsl(var(--ok))">Done</span></div>
+        <p class="text-sm text-muted-foreground"><one line: what shipped / exit criteria met></p>
+      </li>
+      <li class="ml-6">
+        <span class="absolute -left-[9px] w-4 h-4 rounded-full ring-4 ring-background" style="background:hsl(var(--warn))"></span>
+        <div class="flex items-center gap-2"><b>Phase 1 · <NAME> (walking skeleton)</b>
+          <span class="text-xs rounded-full px-2 py-0.5" style="background:hsl(var(--warn)/.15);color:hsl(var(--warn))">In progress</span></div>
+        <p class="text-sm text-muted-foreground"><one line: current focus + the gate that unlocks next></p>
+      </li>
+      <li class="ml-6">
+        <span class="absolute -left-[9px] w-4 h-4 rounded-full" style="background:hsl(var(--todo))"></span>
+        <div class="flex items-center gap-2"><b>Phase 2 · <NAME></b>
+          <span class="text-xs rounded-full px-2 py-0.5" style="background:hsl(var(--todo)/.15);color:hsl(var(--todo))">Next</span></div>
+        <p class="text-sm text-muted-foreground"><one line></p>
+      </li>
+      <!-- …more phases from 06_SDLC/SDLC_MASTER_SPEC.md… -->
+    </ol>
+  </section>
+
+  <!-- ── Status board ───────────────────────────────────────────────────── -->
+  <section class="py-6 border-t border-border grid gap-4 md:grid-cols-3">
+    <div class="card-el rounded-lg border border-border bg-card p-4">
+      <h3 class="font-semibold mb-2 flex items-center gap-2"><span class="w-2 h-2 rounded-full" style="background:hsl(var(--ok))"></span>Working</h3>
+      <ul class="text-sm space-y-1 list-disc ml-4 text-muted-foreground"><li><done thing></li><li><done thing></li></ul>
+    </div>
+    <div class="card-el rounded-lg border border-border bg-card p-4">
+      <h3 class="font-semibold mb-2 flex items-center gap-2"><span class="w-2 h-2 rounded-full" style="background:hsl(var(--warn))"></span>In flight</h3>
+      <ul class="text-sm space-y-1 list-disc ml-4 text-muted-foreground"><li><in-progress thing></li><li><in-progress thing></li></ul>
+    </div>
+    <div class="card-el rounded-lg border border-border bg-card p-4">
+      <h3 class="font-semibold mb-2 flex items-center gap-2"><span class="w-2 h-2 rounded-full" style="background:hsl(var(--risk))"></span>Risks &amp; asks</h3>
+      <ul class="text-sm space-y-1 list-disc ml-4 text-muted-foreground"><li><top risk + mitigation></li><li><the decision we need></li></ul>
+    </div>
+  </section>
+
+  <!-- ── One diagram (Mermaid) ──────────────────────────────────────────── -->
+  <section class="py-6 border-t border-border">
+    <h2 class="text-sm font-semibold uppercase tracking-wide text-muted-foreground mb-4">How it works (at a glance)</h2>
+    <div class="rounded-lg border border-border bg-card p-4 overflow-x-auto">
+      <!-- Swap for the most CEO-legible view: value chain, system context, or the venture arc.
+           Keep it to ~6–8 nodes. Reuse a diagram from 02_DIAGRAMS/ but simplify for a non-technical reader. -->
+      <pre class="mermaid">
+flowchart LR
+  U([<Customer>]) --> P[<Product>]
+  P --> V{{<Core value moment>}}
+  V --> O[[<Outcome / $>]]
+  P -.-> D[(<Data / moat>)]
+      </pre>
+    </div>
+  </section>
+
+  <!-- ── Footer / sources ───────────────────────────────────────────────── -->
+  <footer class="pt-6 border-t border-border text-xs text-muted-foreground">
+    Sources: <code>PROJECT_STATE.md</code> · <code>06_SDLC/SDLC_MASTER_SPEC.md</code> ·
+    <code>_EVAL/SCORECARD.md</code> · <code>M_MONETIZE/METRICS_TREE.md</code>.
+    Every number above traces to one of these. Generated at Station E · <VERSION> · <DATE>.
+  </footer>
+
+</div>
+<script>mermaid.initialize({startOnLoad:true, theme:'neutral'});</script>
+</body>
+</html>

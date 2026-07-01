@@ -1,5 +1,17 @@
 # jallynme-skills
 
+## 0.0.2
+
+### Patch Changes
+
+- project-genesis: lock Station 5 wireframes to **1-page HTML per surface** (Tailwind CDN + shadcn-style
+  tokens, plain HTML — no React/TS) with a new `template/05_WIREFRAMES/_starter.html`, and add a new
+  bookend **Station E — Executive Summary**: a humanized, best-visualized CEO one-pager in HTML (story,
+  KPI cards, roadmap timeline, status board, Mermaid diagram) that refreshes every version and feeds the
+  M launch gate. Wired through SKILL.md, the playbook, station prompts, the roster dispatch map,
+  PROJECT_STATE, template CLAUDE.md, and the README; it invokes `product-management:stakeholder-update`,
+  `product-management:roadmap-update`, and `frontend-design` for depth.
+
 ## 0.0.1
 
 ### Patch Changes
