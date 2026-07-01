@@ -1,0 +1,120 @@
+// ─────────────────────────────────────────────────────────────────────────────
+// <PROJECT_NAME> — data model  (Station 4)
+// Source of truth for the data layer. Derived from 03_DICTIONARY + 02_DIAGRAMS/erd.md.
+// Conventions baked in (the Project Genesis lessons):
+//   • One model per real domain concept (per the dictionary). Don't model convenience tables.
+//   • Real enums for code tables — values are VERBATIM domain codes.
+//   • One strategy-driven model over per-variant tables when variants share a shape.
+//   • Reference/master data is VERSIONED — read "as of" a business date, never "latest".
+//   • Multi-tenant rows carry organizationId; enforce isolation in every query.
+//   • Audit every state change (AuditLog).
+// Replace every <PLACEHOLDER>. Keep names identical to the dictionary's "Canonical name".
+// ─────────────────────────────────────────────────────────────────────────────
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// ── Tenancy & identity ───────────────────────────────────────────────────────
+model Organization {
+  id        String   @id @default(cuid())
+  name      String
+  createdAt DateTime @default(now())
+  users     User[]
+  // <tenant-scoped relations...>
+}
+
+model User {
+  id             String       @id @default(cuid())
+  organizationId String
+  organization   Organization @relation(fields: [organizationId], references: [id])
+  email          String       @unique
+  role           Role
+  createdAt      DateTime     @default(now())
+  @@index([organizationId])
+}
+
+enum Role {
+  ADMIN
+  MEMBER
+  // <project roles from the dictionary>
+}
+
+// ── Core domain object (rename to your aggregate root) ───────────────────────
+// Example of the "one model + strategy" pattern: a single root whose behaviour
+// varies by `type`, instead of one table per type.
+model <CoreObject> {
+  id             String              @id @default(cuid())
+  organizationId String
+  type           <CoreObjectType>    // strategy selector — drives validation/print/rules
+  status         <CoreObjectStatus>  @default(<INITIAL>)
+  businessDate   DateTime            // the "as of" date for versioned reference lookups
+  createdAt      DateTime            @default(now())
+  updatedAt      DateTime            @updatedAt
+  lineItems      <LineItem>[]
+  @@index([organizationId, status])
+}
+
+enum <CoreObjectType> {
+  // VERBATIM domain type codes, e.g.:
+  // TYPE_A // standard
+  // TYPE_B // expedited
+}
+
+enum <CoreObjectStatus> {
+  // VERBATIM lifecycle codes from the dictionary / state diagram, e.g.:
+  // STATUS_A // created
+  // STATUS_B // confirmed
+}
+
+model <LineItem> {
+  id            String       @id @default(cuid())
+  coreObjectId  String
+  coreObject    <CoreObject> @relation(fields: [coreObjectId], references: [id])
+  // <item fields...>
+  @@index([coreObjectId])
+}
+
+// ── Reference / master data (VERSIONED) ──────────────────────────────────────
+// Pattern: keep a version per snapshot; resolve by (code, effective range) using
+// the core object's businessDate. Never overwrite an old version.
+model <RefTable> {
+  id            String   @id @default(cuid())
+  code          String
+  value         String
+  effectiveFrom DateTime
+  effectiveTo   DateTime?
+  version       Int
+  @@unique([code, version])
+  @@index([code, effectiveFrom])
+}
+
+// ── Audit ────────────────────────────────────────────────────────────────────
+model AuditLog {
+  id         String   @id @default(cuid())
+  actorId    String
+  action     String
+  entity     String
+  entityId   String
+  ip         String?
+  createdAt  DateTime @default(now())
+  @@index([entity, entityId])
+}
+
+// ── Mobile (only if there's a mobile surface — delete if web-only) ────────────
+// Device + push-token registry for a mobile app.
+// model Device {
+//   id        String         @id @default(cuid())
+//   userId    String
+//   platform  DevicePlatform
+//   pushToken String?
+//   appVersion String?
+//   lastSeen  DateTime       @default(now())
+//   @@index([userId])
+// }
+// enum DevicePlatform { IOS ANDROID WEB }

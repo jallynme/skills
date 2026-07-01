@@ -1,0 +1,209 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Project Genesis — Loop Dashboard</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.umd.min.js"></script>
+<style>
+  :root{--bg:#0f1115;--card:#181b22;--ink:#e7e9ee;--mut:#9aa3b2;--line:#2a2f3a;
+        --grn:#3fb950;--amb:#d29922;--gry:#5b6370;--blu:#388bfd;--red:#f85149;--acc:#7c8cff}
+  *{box-sizing:border-box} body{margin:0;background:var(--bg);color:var(--ink);
+    font:14px/1.5 ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,sans-serif}
+  .wrap{max-width:1100px;margin:0 auto;padding:20px}
+  h1{font-size:18px;margin:0 0 2px} .sub{color:var(--mut);font-size:12px;margin-bottom:16px}
+  .goal{background:linear-gradient(90deg,#1b2030,#181b22);border:1px solid var(--line);
+        border-radius:12px;padding:14px 16px;margin-bottom:16px;display:flex;gap:14px;align-items:center}
+  .goal .g{font-size:13px;color:var(--mut)} .goal b{color:var(--ink)}
+  .grade{margin-left:auto;font-weight:800;font-size:34px;line-height:1;padding:6px 16px;border-radius:10px;
+         background:#11151c;border:1px solid var(--line)}
+  .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px;margin-bottom:16px}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px}
+  .card .k{color:var(--mut);font-size:11px;text-transform:uppercase;letter-spacing:.04em}
+  .card .v{font-size:26px;font-weight:700;margin-top:4px}
+  .pill{display:inline-block;font-size:11px;padding:1px 7px;border-radius:20px;margin-right:5px}
+  .row{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  @media(max-width:820px){.row{grid-template-columns:1fr}}
+  .panel{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px;margin-bottom:16px}
+  .panel h2{font-size:13px;margin:0 0 10px;color:var(--ink)}
+  .chips{display:flex;flex-wrap:wrap;gap:6px}
+  .chip{font-size:11px;padding:4px 9px;border-radius:8px;border:1px solid var(--line);background:#11151c}
+  .chip .d{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:5px;vertical-align:middle}
+  pre{background:#0c0e13;border:1px solid var(--line);border-radius:10px;padding:12px;overflow:auto;
+      font:12px/1.5 ui-monospace,SFMono-Regular,Menlo,monospace;color:#cdd3df;white-space:pre-wrap}
+  textarea{width:100%;height:120px;background:#0c0e13;color:#cdd3df;border:1px solid var(--line);
+           border-radius:10px;padding:10px;font:12px/1.45 ui-monospace,Menlo,monospace}
+  button{background:var(--acc);color:#fff;border:0;border-radius:8px;padding:8px 14px;font-weight:600;cursor:pointer}
+  button.ghost{background:#11151c;border:1px solid var(--line);color:var(--ink)}
+  .tools{display:flex;gap:8px;margin:8px 0 0}
+  table{width:100%;border-collapse:collapse;font-size:12px} td,th{border-bottom:1px solid var(--line);padding:6px 8px;text-align:left}
+  .sev-High{color:var(--red);font-weight:700}.sev-Med{color:var(--amb)}.sev-Low{color:var(--mut)}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>🧭 Project Genesis — Loop Dashboard</h1>
+  <div class="sub">Paste your <code>PROJECT_STATE.md</code> below and hit Refresh. Self-contained — open in any browser. (Preloaded with the worked-example state.)</div>
+
+  <div class="goal"><div class="g">🎯 Goal<br><b id="goal">—</b></div><div class="grade" id="gradeBig">—</div></div>
+
+  <div class="cards" id="cards"></div>
+
+  <div class="panel"><h2>Stations (V → 1–9 → M)</h2><div class="chips" id="stations"></div></div>
+
+  <div class="row">
+    <div class="panel"><h2>Grade trend (per signed-off version)</h2><canvas id="trend" height="160"></canvas></div>
+    <div class="panel"><h2>Gaps by severity (open vs closed)</h2><canvas id="gaps" height="160"></canvas></div>
+  </div>
+
+  <div class="panel"><h2>Open gaps</h2><table id="gapTable"><tbody></tbody></table></div>
+
+  <div class="panel"><h2>Latest loop trace (Goal Loop · ReAct)</h2><pre id="trace">—</pre></div>
+
+  <div class="panel"><h2>Source — PROJECT_STATE.md</h2>
+    <textarea id="src" spellcheck="false"></textarea>
+    <div class="tools"><button onclick="parseAndRender()">↻ Refresh</button>
+      <button class="ghost" onclick="loadSample()">Load sample</button></div>
+  </div>
+</div>
+
+<script>
+const SAMPLE = String.raw`# PROJECT_STATE — Sample-Booking
+**🎯 Goal (what the loop is driving toward):** Validate + scope a launch-ready MVP for solo service providers; get Phase 1 to grade A.
+**Project:** Sample-Booking · **Domain:** appointment-booking SaaS · **Current version:** v3 · **Updated:** 2026-06-30
+**Current grade:** A (see _EVAL/SCORECARD.md) · **Validate:** GO · **Launch:** GO/HOLD
+
+## 1. Station status
+| # | Station | Status | Version | Output | Gate? | Notes |
+|---|---|---|---|---|---|---|
+| V | Validate + Feature Discovery | ✅ gate met | v2 | V_VALIDATE/* | ✅ | GO; 9 features locked |
+| 1 | Knowledge | ✅ gate met | v1 | KNOWLEDGE_INDEX | ✅ | |
+| 2 | Diagrams | ✅ gate met | v2 | 02_DIAGRAMS | ✅ | |
+| 3 | Dictionary | ✅ gate met | v2 | DICTIONARY | ✅ | |
+| 4 | Data model | ✅ gate met | v3 | schema.prisma | ✅ | 11 models |
+| 5 | Wireframes | ✅ gate met | v2 | wireframes | ✅ | mobile surface |
+| 6 | SDLC spec | ✅ gate met | v1 | SDLC | ✅ | 4 phases |
+| 7 | Backlog | ✅ gate met | v2 | 07_BACKLOG | ✅ | 14 stories |
+| 8 | Review loop | 🟨 in progress | v3 | REVIEW_LOG | 🟨 | round 2, 1 Med open |
+| 9 | Specialist skill | ⬜ todo | — | — | ⬜ | |
+| M | Monetize/Launch | ⬜ todo | — | — | ⬜ | |
+
+## 3. Gap / bug log
+| ID | Date | Station | Severity | Description | Found by | Status | Fixed in version |
+|---|---|---|---|---|---|---|---|
+| G-001 | 06-28 | 4 | High | no timezone on Appointment | CTO | closed | v3 |
+| G-002 | 06-29 | 7 | High | refund-window AC missing | QA | closed | v2 |
+| G-003 | 06-30 | 5 | Med | mobile booking no offline state | Design | open | — |
+
+## 5. Sign-off ledger
+| Version | Date | Grade | CPO | Specialist | CTO | QA | CFO | CMO | Counsel | Data | Red-Team | Clean? |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| v1 | 06-27 | C | x | x | x | | x | | | | | |
+| v2 | 06-29 | B+ | x | x | x | | x | x | x | | | |
+| v3 | 06-30 | A | x | x | x | x | x | x | x | x | | pending |
+
+## 7. Goal-Loop trace
+` + "```" + `
+[R2.1] Stage Trigger · Station 5 · v3 · 2026-06-30
+Trigger:       G-003 (Med) — mobile booking has no offline/confirmation state
+Investigate:   solos book on flaky data; expected: add offline+confirm; gate: interface-completeness
+Act:           re-ran Station 5 -> added offline + confirmation screens to mobile.html
+Observe+Learn: gate not yet met — Design wants a "pending sync" pattern; grade holds A pending close
+Backlog->Assign:1 task -> Head of Design (offline) + QA (event fires)
+Decision:      loop -> re-run 5 -> 7 (add AC), then re-review
+` + "```" + `
+`;
+
+const GRADEN = {"S":5,"A+":4.3,"A":4,"A-":3.7,"B+":3.3,"B":3,"B-":2.7,"C+":2.3,"C":2,"C-":1.7,"D":1,"F":0};
+const $ = s => document.querySelector(s);
+let trendChart, gapsChart;
+
+function lines(t){return t.replace(/\r/g,"").split("\n");}
+function section(t,title){
+  const ls=lines(t); let out=[],on=false;
+  for(const l of ls){ if(/^##\s/.test(l)){ on = l.toLowerCase().includes(title.toLowerCase()); continue;} if(on) out.push(l);} return out;
+}
+function rows(secLines){ // markdown table data rows -> array of cell-arrays
+  return secLines.filter(l=>l.trim().startsWith("|") && !/^\|[\s:|-]+\|?\s*$/.test(l))
+    .map(l=>l.split("|").slice(1,-1).map(c=>c.trim()))
+    .filter(r=>r.length>1);
+}
+function gradeColor(g){g=(g||"").trim();const n=GRADEN[g]??(GRADEN[g[0]]??0);
+  return n>=5?"#3fb950":n>=4?"#56d364":n>=3?"#d29922":n>=2?"#db6d28":"#f85149";}
+
+function parse(t){
+  const m = {};
+  m.goal = (t.match(/Goal\s*\(what the loop[^)]*\):\*\*\s*(.+)/i)||t.match(/🎯[^\n]*?:\*\*\s*(.+)/)||[])[1] || "—";
+  m.grade = (t.match(/Current grade:\*\*\s*([A-FS][+-]?)/i)||[])[1] || "—";
+  // stations
+  const st = rows(section(t,"Station status")).filter(r=>!/^#$/.test(r[0]) && r[1] && !/^Station$/i.test(r[1]));
+  m.stations = st.map(r=>({id:r[0],name:r[1],status:r[2]||""}));
+  // gaps
+  const gp = rows(section(t,"Gap")).filter(r=>/^G-/.test(r[0]));
+  m.gaps = gp.map(r=>({id:r[0],station:r[2],sev:(r[3]||"").replace(/[^A-Za-z]/g,""),desc:r[4],status:(r[6]||"").toLowerCase()}));
+  // trend
+  const sg = rows(section(t,"Sign-off")).filter(r=>/^v\d/i.test(r[0]));
+  m.trend = sg.map(r=>({v:r[0],grade:r[2]}));
+  // trace (last fenced block in section 7)
+  const sec7 = section(t,"trace").join("\n"); const fb=[...sec7.matchAll(/```([\s\S]*?)```/g)];
+  m.trace = fb.length? fb[fb.length-1][1].trim() : "—";
+  return m;
+}
+
+function statusDot(s){ if(s.includes("✅"))return["var(--grn)","gate met"];
+  if(s.includes("🟨"))return["var(--amb)","in progress"]; if(s.includes("🔁"))return["var(--blu)","re-opened"];
+  return["var(--gry)","todo"]; }
+
+function render(m){
+  $("#goal").textContent = m.goal;
+  const gb=$("#gradeBig"); gb.textContent=m.grade; gb.style.color=gradeColor(m.grade);
+  // cards
+  const done=m.stations.filter(s=>s.status.includes("✅")).length, tot=m.stations.length;
+  const openH=m.gaps.filter(g=>g.status.includes("open")&&g.sev==="High").length;
+  const openM=m.gaps.filter(g=>g.status.includes("open")&&g.sev==="Med").length;
+  const openL=m.gaps.filter(g=>g.status.includes("open")&&g.sev==="Low").length;
+  const clean = openH===0 && openM===0;
+  $("#cards").innerHTML = [
+    ["Stations gate-met", `${done}/${tot}`, `<div style="height:6px;background:#11151c;border-radius:4px;margin-top:8px"><div style="height:6px;border-radius:4px;background:var(--grn);width:${tot?done/tot*100:0}%"></div></div>`],
+    ["Open gaps", `${openH+openM+openL}`, `<span class="pill" style="background:#3a1416;color:#f85149">${openH} High</span><span class="pill" style="background:#3a2c10;color:#d29922">${openM} Med</span><span class="pill" style="background:#1b2330;color:#9aa3b2">${openL} Low</span>`],
+    ["Current grade", m.grade, `<div style="color:var(--mut);font-size:12px;margin-top:6px">target: A to advance · S to launch</div>`],
+    ["Round clean?", clean?"✅ yes":"⛔ no", `<div style="color:var(--mut);font-size:12px;margin-top:6px">zero High/Med open</div>`],
+  ].map(c=>`<div class="card"><div class="k">${c[0]}</div><div class="v" style="${c[0]=='Current grade'?'color:'+gradeColor(m.grade):''}">${c[1]}</div>${c[2]||""}</div>`).join("");
+  // stations chips
+  $("#stations").innerHTML = m.stations.map(s=>{const[c,t]=statusDot(s.status);
+    return `<span class="chip" title="${t}"><span class="d" style="background:${c}"></span>${s.id} · ${s.name}</span>`;}).join("");
+  // gap table
+  const og=m.gaps.filter(g=>g.status.includes("open"));
+  $("#gapTable").innerHTML = og.length? "<tr><th>ID</th><th>Station</th><th>Sev</th><th>Description</th></tr>"+
+    og.map(g=>`<tr><td>${g.id}</td><td>${g.station}</td><td class="sev-${g.sev}">${g.sev}</td><td>${g.desc||""}</td></tr>`).join("")
+    : "<tr><td style='color:var(--mut)'>No open gaps 🎉</td></tr>";
+  $("#trace").textContent = m.trace;
+  drawCharts(m);
+}
+
+function drawCharts(m){
+  const tlabels=m.trend.map(x=>x.v), tdata=m.trend.map(x=>GRADEN[(x.grade||"").trim()]??GRADEN[(x.grade||"")[0]]??null);
+  const tcol=m.trend.map(x=>gradeColor(x.grade));
+  if(trendChart)trendChart.destroy();
+  trendChart=new Chart($("#trend"),{type:"line",data:{labels:tlabels,datasets:[{data:tdata,
+    borderColor:"#7c8cff",backgroundColor:"rgba(124,140,255,.15)",fill:true,tension:.3,
+    pointBackgroundColor:tcol,pointRadius:5}]},
+    options:{plugins:{legend:{display:false}},scales:{y:{min:0,max:5,ticks:{stepSize:1,color:"#9aa3b2",
+      callback:v=>({0:"F",1:"D",2:"C",3:"B",4:"A",5:"S"}[v]??"")},grid:{color:"#222"}},
+      x:{ticks:{color:"#9aa3b2"},grid:{display:false}}}}});
+  const sev=["High","Med","Low"];
+  const open=sev.map(s=>m.gaps.filter(g=>g.sev===s&&g.status.includes("open")).length);
+  const closed=sev.map(s=>m.gaps.filter(g=>g.sev===s&&!g.status.includes("open")).length);
+  if(gapsChart)gapsChart.destroy();
+  gapsChart=new Chart($("#gaps"),{type:"bar",data:{labels:sev,datasets:[
+    {label:"open",data:open,backgroundColor:"#f85149"},{label:"closed",data:closed,backgroundColor:"#3fb950"}]},
+    options:{plugins:{legend:{labels:{color:"#9aa3b2"}}},scales:{x:{stacked:true,ticks:{color:"#9aa3b2"},grid:{display:false}},
+      y:{stacked:true,ticks:{color:"#9aa3b2",precision:0},grid:{color:"#222"}}}}});
+}
+
+function parseAndRender(){ render(parse($("#src").value)); }
+function loadSample(){ $("#src").value=SAMPLE; parseAndRender(); }
+loadSample();
+</script>
+</body>
+</html>

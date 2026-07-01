@@ -1,0 +1,121 @@
+// Sample-Booking — data model (filled example, Station 4 · v3)
+// One strategy-driven Appointment (type = STANDARD|GROUP) instead of a table per service.
+// Statuses are verbatim from 03_DICTIONARY. Timezone on Appointment (gap G-001 fix).
+
+generator client { provider = "prisma-client-js" }
+datasource db { provider = "postgresql"; url = env("DATABASE_URL") }
+
+model Provider {
+  id            String           @id @default(cuid())
+  email         String           @unique
+  businessName  String
+  timezone      String                                   // IANA, e.g. "America/Chicago"
+  bookingSlug   String           @unique                 // the bio link: /b/<slug>
+  depositPct    Decimal          @default(0.20)
+  createdAt     DateTime         @default(now())
+  services      Service[]
+  availability  AvailabilityRule[]
+  appointments  Appointment[]
+  clients       Client[]
+  devices       Device[]
+}
+
+model Service {
+  id          String   @id @default(cuid())
+  providerId  String
+  provider    Provider @relation(fields: [providerId], references: [id])
+  name        String
+  durationMin Int
+  priceCents  Int
+  active      Boolean  @default(true)
+  @@index([providerId])
+}
+
+model AvailabilityRule {
+  id          String   @id @default(cuid())
+  providerId  String
+  provider    Provider @relation(fields: [providerId], references: [id])
+  weekday     Int                                        // 0–6
+  startMin    Int                                        // minutes from midnight
+  endMin      Int
+  bufferMin   Int      @default(0)
+  leadTimeMin Int      @default(120)
+  @@index([providerId, weekday])
+}
+
+model Client {
+  id          String        @id @default(cuid())
+  providerId  String
+  provider    Provider      @relation(fields: [providerId], references: [id])
+  name        String
+  phone       String
+  email       String?
+  createdAt   DateTime      @default(now())
+  appointments Appointment[]
+  @@unique([providerId, phone])
+}
+
+model Appointment {
+  id          String            @id @default(cuid())
+  providerId  String
+  provider    Provider          @relation(fields: [providerId], references: [id])
+  clientId    String
+  client      Client            @relation(fields: [clientId], references: [id])
+  serviceId   String
+  type        AppointmentType   @default(STANDARD)
+  status      AppointmentStatus @default(PENDING)
+  startAt     DateTime
+  endAt       DateTime
+  timezone    String                                    // snapshot of provider tz at booking (G-001)
+  createdAt   DateTime          @default(now())
+  deposit     Deposit?
+  reminders   Reminder[]
+  @@index([providerId, startAt])
+  @@index([status])
+}
+
+enum AppointmentType { STANDARD GROUP }
+enum AppointmentStatus { PENDING CONFIRMED COMPLETED CANCELLED NO_SHOW EXPIRED }
+
+model Deposit {
+  id              String        @id @default(cuid())
+  appointmentId   String        @unique
+  appointment     Appointment   @relation(fields: [appointmentId], references: [id])
+  amountCents     Int
+  status          DepositStatus @default(HELD)
+  stripePaymentId String?
+  createdAt       DateTime      @default(now())
+}
+enum DepositStatus { HELD CAPTURED REFUNDED FAILED }
+
+model Reminder {
+  id            String        @id @default(cuid())
+  appointmentId String
+  appointment   Appointment   @relation(fields: [appointmentId], references: [id])
+  channel       ReminderChannel
+  sendAt        DateTime
+  sentAt        DateTime?
+  @@index([sendAt])
+}
+enum ReminderChannel { SMS EMAIL PUSH }
+
+model Device {                                            // mobile push (solo books on phone)
+  id         String         @id @default(cuid())
+  providerId String
+  provider   Provider       @relation(fields: [providerId], references: [id])
+  platform   DevicePlatform
+  pushToken  String?
+  lastSeen   DateTime       @default(now())
+  @@index([providerId])
+}
+enum DevicePlatform { IOS ANDROID WEB }
+
+model AuditLog {
+  id        String   @id @default(cuid())
+  actorId   String
+  action    String
+  entity    String
+  entityId  String
+  createdAt DateTime @default(now())
+  @@index([entity, entityId])
+}

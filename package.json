@@ -1,0 +1,30 @@
+{
+  "name": "jallynme-skills",
+  "version": "0.0.1",
+  "private": true,
+  "description": "Jeremy's agent skills — an S-grade solo-founder venture kit (project-genesis) plus hooks and workflow skills. Install with: npx skills@latest add jallynme/skills",
+  "keywords": [
+    "claude",
+    "agent-skills",
+    "skills",
+    "ai",
+    "project-genesis",
+    "solo-founder"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jallynme/skills"
+  },
+  "author": "jallynme",
+  "license": "MIT",
+  "scripts": {
+    "changeset": "changeset",
+    "version": "changeset version",
+    "lint": "bash skills/product/project-genesis/scripts/lint.sh"
+  },
+  "devDependencies": {
+    "@changesets/changelog-github": "^0.7.0",
+    "@changesets/cli": "^2.30.0"
+  },
+  "packageManager": "npm@10.9.4"
+}
