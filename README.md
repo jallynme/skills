@@ -54,6 +54,30 @@ bundled resources. This is the [skills.sh](https://skills.sh) convention.
 - **Shared language:** read **[`CONTEXT.md`](./CONTEXT.md)** first — it decodes the vocabulary
   (skill, agent, station, the swarm, the Goal Loop) so agents and humans speak the same language.
 
+## Publishing to skills.sh
+
+This repo follows the [skills.sh](https://skills.sh) convention, so it becomes discoverable once it's
+**public on GitHub** and **installed at least once** (the CLI's anonymous telemetry is what indexes it):
+
+1. **Push to a public repo** `jallynme/skills` (create the empty repo on GitHub first):
+   ```bash
+   git add -A && git commit -m "Release v0.0.1"
+   git branch -M main
+   git remote add origin https://github.com/jallynme/skills
+   git push -u origin main
+   ```
+2. **Install it once** so it's indexed on the leaderboard + audits:
+   ```bash
+   npx skills@latest add jallynme/skills
+   ```
+3. **Add the `skills-sh` GitHub topic** (repo page -> *Manage topics*) to aid discovery.
+4. The repo page is grouped via **`skills.sh.json`** (included), and the install **badge** is in the
+   header. Security audits (Socket / Snyk / Gen) run on indexed skills, then appear on each skill's page
+   and on [skills.sh/audits](https://skills.sh/audits).
+
+> skills.sh reads **GitHub**, not npm - the `"private": true` in `package.json` only guards
+> `npm publish` and has no effect on listing. The repo itself must be **public**.
+
 ## License
 
 [MIT](./LICENSE) © jallynme

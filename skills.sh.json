@@ -1,0 +1,21 @@
+{
+  "$schema": "https://skills.sh/schemas/skills.sh.schema.json",
+  "notGrouped": "bottom",
+  "groupings": [
+    {
+      "title": "Project Genesis",
+      "description": "Turn an idea into a graded, build-ready venture blueprint — and the commands to start one.",
+      "skills": ["project-genesis", "genesis-interview", "genesis-init"]
+    },
+    {
+      "title": "Engineering",
+      "description": "Keep a skills repo clean and correct.",
+      "skills": ["skill-lint"]
+    },
+    {
+      "title": "Setup",
+      "description": "One-time per-repo configuration for the skills and the Claude Code hooks.",
+      "skills": ["setup-jallynme-skills", "setup-claude-code-hooks"]
+    }
+  ]
+}
