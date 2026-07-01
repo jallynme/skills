@@ -32,7 +32,7 @@ Sets up a fresh project so the swarm can run the venture loop against it.
 - **Do not overwrite** an existing `<PROJECT_NAME>/` — stop and ask if it exists.
 
 ## 3. Seed the state
-Open `<PROJECT_NAME>/PROJECT_STATE.md` and set: the **🎯 Goal**, **Project**, and **Domain** at the top.
+Open `<PROJECT_NAME>/PROJECT_STATE.md` and set: the **Goal**, **Project**, and **Domain** at the top.
 Leave every station `⬜ todo`.
 
 ## 4. Tell the user what's next (two paths)

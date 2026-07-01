@@ -14,7 +14,7 @@ else
 fi
 [ -z "$cmd" ] && exit 0
 
-block() { echo "🛑 git-guardrail blocked a dangerous command: $1" >&2
+block() { echo "git-guardrail blocked a dangerous command: $1" >&2
           echo "   If you really mean it, run it yourself in a terminal." >&2; exit 2; }
 
 case "$cmd" in

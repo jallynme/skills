@@ -11,7 +11,7 @@
 ### Challenges
 | ID | Challenge | Sev | To clear, prove… | Answer | Status |
 |---|---|---|---|---|---|
-| RT-01 | Calendly adds deposits and crushes us | High | our wedge survives a fast-follow | deposits are a checkbox for them; our win is **auto-refund + phone-first UX**; their mobile is 3.4★ | answered |
+| RT-01 | Calendly adds deposits and crushes us | High | our wedge survives a fast-follow | deposits are a checkbox for them; our win is **auto-refund + phone-first UX**; their mobile is 3.4* | answered |
 | RT-02 | Clients won't pay to book | High | ≥60% accept in a real test | concierge test 17/20 = 85% (A-002) | answered |
 | RT-03 | No cheap channel to solos | Med | one channel with < $80 CAC | creator test 3 signups on $50 → promising, scaling (A-004) | 🟡 monitoring |
 | RT-04 | "We build it because AI makes it easy" | Med | real pull | 6.1% fake-door sign-up | answered |

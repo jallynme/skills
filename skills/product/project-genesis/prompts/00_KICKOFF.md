@@ -64,7 +64,7 @@ V · FEATURE DISCOVERY  (LEAN START — I may give you only the domain + big-pic
   Lead Competitor Analyst + CPO. Use deep-research + live competitor sites/apps (Claude in Chrome) +
   app-store listings & reviews. Tear down the top competitors into V_VALIDATE/COMPETITOR_FEATURE_MATRIX.md,
   then PROPOSE a full feature set in V_VALIDATE/FEATURE_MAP.md — classified table-stakes / differentiator
-  / delighter (Kano + MoSCoW), with ⭐ features I DIDN'T ask for but the market expects, each with
+  / delighter (Kano + MoSCoW), with features I DIDN'T ask for but the market expects, each with
   evidence, scoped per surface (web / mobile / admin). Copy common patterns, never protected IP (flag
   those for Counsel). STOP at scope-lock — it's my call — before Station 1.
 

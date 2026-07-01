@@ -29,6 +29,32 @@ turns a one-line idea into a researched, scoped plan (deep research + competitor
 | **[setup-claude-code-hooks](./skills/misc/setup-claude-code-hooks/SKILL.md)** | misc | Install Claude Code hooks from `hooks/` — a **git guardrail** (blocks `push --force`, `reset --hard`, `clean -fd`, …) and a **lint-on-stop** gate. |
 | **[setup-jallynme-skills](./skills/setup-jallynme-skills/SKILL.md)** | setup | Run once per repo — configures the issue tracker, doc layout, and hook install that the other skills consume. |
 
+## Companion skills (optional dependencies)
+
+`project-genesis` is **hybrid** — every station names a default tool and a swap. On top of the defaults
+its swarm can call a set of **external, third-party skill packs** for depth. They're **optional and
+least-privilege**: the pipeline runs without them (it falls back to the Markdown/HTML defaults), and each
+maps to a specific station or agent. Full manifest — what each adds, where it's used, and how to install:
+**[`COMPANION_SKILLS.md`](./skills/product/project-genesis/COMPANION_SKILLS.md)**.
+
+| Companion pack | Adds | Used at |
+|---|---|---|
+| [spec-kit](https://github.com/github/spec-kit) | spec-driven dev (`specify · plan · tasks · implement`) | SDLC · Backlog · handoff |
+| [agent-skills](https://github.com/addyosmani/agent-skills) (Addy Osmani) | 24 lifecycle skills (interview→spec→TDD→review→ship) | Validate · Build · Review |
+| [superpowers](https://github.com/obra/superpowers) | brainstorming · plans · subagent-dev · git-worktrees · debugging | the loop · Review · handoff |
+| [graphify](https://github.com/safishamsi/graphify) | folder → queryable knowledge graph | Knowledge · Diagrams |
+| [claude-obsidian](https://github.com/AgriciDaniel/claude-obsidian) | vault second brain (`/wiki · ingest · /autoresearch`) | Knowledge · Validate |
+| [obsidian-skills](https://github.com/kepano/obsidian-skills) (kepano) | `obsidian-markdown · json-canvas · defuddle` | Intake · Knowledge · Diagrams |
+| [agency-agents](https://github.com/msitarzewski/agency-agents) | 232 specialist personas / 16 divisions | roster booster (whole swarm) |
+| [andrej-karpathy-skills](https://github.com/multica-ai/andrej-karpathy-skills) | think-first · simplicity · surgical · goal-driven | operating principles + the loop |
+| [headroom](https://github.com/headroomlabs-ai/headroom) | input-token compression (60–95% fewer) | big reads / the Orchestrator |
+| [caveman](https://github.com/juliusbrussee/caveman) | output-token compression + terse commits/reviews | Review · handoff |
+| [claude-mem](https://github.com/thedotmack/claude-mem) | persistent cross-session memory | re-loop continuity |
+
+The swarm also grew to match: alongside the C-suite it now ships **build & launch specialists** —
+Security Engineer, DevOps/SRE, AI/ML Engineer, Technical Writer, and Customer Success (see
+[`agents/ROSTER.md`](./skills/product/project-genesis/agents/ROSTER.md)).
+
 ## Layout
 
 ```

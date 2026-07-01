@@ -1,7 +1,7 @@
 # Assumption Register — Sample-Booking (filled example)
 
 > The riskiest beliefs, their status, the cheapest test, and the result. Red-Team attacks the riskiest
-> unvalidated one first. Legend: 🔴 unvalidated · 🟡 testing · 🟢 validated · ⚫ invalidated.
+> unvalidated one first. Legend: 🔴 unvalidated · 🟡 testing · 🟢 validated · X invalidated.
 
 | ID | Assumption | Type | If wrong… | Risk | Status | Cheapest test | Result / evidence | Owner |
 |---|---|---|---|---|---|---|---|---|

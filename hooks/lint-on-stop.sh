@@ -9,7 +9,7 @@ LINT="skills/product/project-genesis/scripts/lint.sh"
 if bash "$LINT" >/tmp/skills-lint.out 2>&1; then
   echo "✅ skills lint clean"
 else
-  echo "⚠️  skills lint found issues — run: bash $LINT" >&2
+  echo "WARN  skills lint found issues — run: bash $LINT" >&2
   tail -n 20 /tmp/skills-lint.out >&2 || true
 fi
 exit 0

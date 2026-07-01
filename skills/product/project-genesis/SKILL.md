@@ -44,16 +44,18 @@ machine runs for any domain.
 
 | Station output | Default tool | Swap with |
 |---|---|---|
-| Knowledge board | **FigJam** (Figma MCP `generate_diagram` / `get_figjam`) | Miro, a Markdown knowledge index |
-| Diagrams | **Mermaid** in Markdown, or **FigJam** | draw.io, PlantUML, Figma |
+| Knowledge board | **FigJam** (Figma MCP `generate_diagram` / `get_figjam`) | Miro · a Markdown knowledge index · **graphify** (folder→graph) · **claude-obsidian** vault |
+| Diagrams | **Mermaid** in Markdown, or **FigJam** | draw.io · PlantUML · Figma · **graphify** graph · kepano **json-canvas** |
 | Data model | **Prisma** (`schema.prisma`, PostgreSQL) | raw SQL DDL, DBML, Drizzle |
 | Wireframes | **1-page HTML per surface — Tailwind (CDN) + shadcn-style tokens, plain HTML, no React/TS** | Figma Make, v0, Penpot |
-| Backlog cards | **Markdown story cards** (10-section template) | Jira, Linear, Notion, GitHub Issues |
+| Backlog cards | **Markdown story cards** (10-section template) | Jira · Linear · Notion · GitHub Issues · **spec-kit** `tasks` |
 | Specialist | **a Skill (`SKILL.md`)** | a plain `<domain>-expert.md` brief |
 | Executive summary | **1-page HTML CEO briefing** (Tailwind + Mermaid, humanized, visualized) | Google Slides, `pptx`, a Notion doc |
 
 Pick the default unless the user names another. If a connector for the swap exists (Figma, Notion,
-Linear, GitHub…), search for it and offer it; otherwise produce the Markdown/HTML equivalent.
+Linear, GitHub…), search for it and offer it; otherwise produce the Markdown/HTML equivalent. The
+bolded swaps above are **companion skill packs** — external, optional, least-privilege dependencies the
+swarm calls for depth; the full manifest (what each adds + where used + install) is `COMPANION_SKILLS.md`.
 
 ---
 
@@ -101,11 +103,41 @@ backed by an installed plugin skill it calls for depth. Full briefs: `agents/<fi
 | **Head of Sales** *(as-needed)* | sales motion, pipeline, onboarding "aha" | sales | Validate · Monetize |
 | **Head of Design** *(as-needed)* | UX, user research, a11y, **mobile UX** | design | Validate · 5 · 7 |
 | **Head of People** *(as-needed, later)* | first-hires plan, org design | human-resources | capacity / hiring |
+| **Security Engineer** *(spawn per auth/PII/money slice)* | threat model, OWASP, authz/tenancy, secrets, supply-chain | engineering:security-review · agent-skills | 4 · 6 · 8 |
+| **DevOps / SRE** *(as-needed → build/handoff)* | CI/CD, IaC, environments, deploy/rollback, observability, SLOs | engineering · agent-skills · Vercel | 6 · handoff · post-launch |
+| **AI / ML Engineer** *(if the product has a model)* | model/pattern choice, eval harness, cost/latency, guardrails | claude-api · ai-sdk · karpathy | V · 4 · 6 · 7 · 8 |
+| **Technical Writer** *(as-needed → handoff)* | ADRs, API reference, user/onboarding docs, handoff README, CHANGELOG | doc-coauthoring · agent-skills | 6 · 9 · E · handoff |
+| **Customer Success** *(as-needed, post-launch)* | onboarding→activation, retention/churn, support, feedback loop | sales · claude-obsidian KB | Monetize · post-launch |
 | **`<domain>`-specialist** | the per-project domain expert — **generated at Station 9**; guards domain correctness | (generated) | every pass after S9 |
 
 > Run an agent three ways: the main session **plays** it · **spawn** it as a subagent (for parallel
 > review) · **invoke** its mapped plugin skill for depth. A gate counts as reviewed only when the
 > relevant agents — **and the Red-Team** — have logged findings (`08_REVIEW/REVIEW_LOG.md`).
+
+## 0.7 Companion skills (external dependencies the swarm calls for depth)
+
+The "Backed by" plugins above are **generic capability names**. On top of them the workflow can call
+specific **third-party skill packs** — optional, least-privilege dependencies you install once, then
+the Orchestrator invokes by name. The pipeline runs without any of them (it falls back to the defaults
+in §0.5); with them the agents get real method instead of improvising. **Full manifest — what each adds,
+where it's used, and how to install: `COMPANION_SKILLS.md`.** The short version:
+
+| Pack | Adds | Used at |
+|---|---|---|
+| **spec-kit** (github) | spec-driven dev: `specify · plan · tasks · implement · analyze · checklist` | 6 · 7 · 8 · handoff |
+| **agent-skills** (addyosmani) | 24 lifecycle skills (interview→spec→TDD→review→ship) | V · 1 · 6/7 · 8 · handoff |
+| **superpowers** (obra) | brainstorming · writing-plans · subagent-driven-dev · git-worktrees · debugging · writing-skills | V · 6/7 · 8 · 9 · handoff |
+| **graphify** (safishamsi) | folder → queryable knowledge graph (HTML + md + JSON) | 1 Knowledge · 2 Diagrams |
+| **claude-obsidian** (AgriciDaniel) | vault second brain: `/wiki · ingest · /autoresearch · lint` | 1 Knowledge · V · 8 |
+| **obsidian-skills** (kepano) | `obsidian-markdown · json-canvas · defuddle` | 00 Intake · 1 · 2 · 3 |
+| **agency-agents** (msitarzewski) | 232 specialist personas / 16 divisions | roster booster (whole swarm) |
+| **andrej-karpathy-skills** (multica-ai) | think-first · simplicity · surgical-changes · goal-driven | operating principles + the loop |
+| **headroom** (headroomlabs) | input-token compression (60–95% fewer) | Orchestrator / big reads |
+| **caveman** (juliusbrussee) | output-token compression + `caveman-commit/review` | 8 Review · handoff commits |
+| **claude-mem** (thedotmack) | persistent cross-session memory | Orchestrator / re-loop continuity |
+
+> **Rule:** a companion is a convenience, never a gate. If it's not installed, use the §0.5 default and
+> note it in `PROJECT_STATE.md`; the domain specialist and Red-Team still own the sign-off.
 
 ---
 
@@ -295,6 +327,8 @@ domain rule, the schema, or the API contract.
 
 ## 5. Pointers
 - Full process spec & rationale: `PROJECT_GENESIS_PLAYBOOK.md`
+- **Companion skills** (external deps the swarm calls, per station/agent): `COMPANION_SKILLS.md`
+- The agent swarm + dispatch map (incl. Security, DevOps, AI/ML, Tech Writer, Customer Success): `agents/ROSTER.md`
 - Copy-paste prompts (kickoff / per-station / re-loop): `prompts/`
 - Per-project scaffold: `template/`
 - Worked reference example: a real, full-scale product build (knowledge boards, `schema.prisma`,

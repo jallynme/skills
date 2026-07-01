@@ -119,7 +119,7 @@ copy-paste prompt for each is in `prompts/STATION_PROMPTS.md`.
   (Claude in Chrome) + app-store listings & reviews. Tear down the top competitors into
   `V_VALIDATE/COMPETITOR_FEATURE_MATRIX.md`, then **propose** a full feature set in
   `V_VALIDATE/FEATURE_MAP.md` — classified table-stakes / differentiator / delighter (Kano + MoSCoW),
-  including ⭐ features the founder didn't ask for but the market expects, each with evidence, scoped
+  including features the founder didn't ask for but the market expects, each with evidence, scoped
   per surface (web / mobile / admin). **Copycat rule:** copy common patterns & table-stakes; never
   clone protected IP/brand (flag for Counsel). Win = parity + a wedge + one leapfrog.
 - **Output:** the competitor feature-list set (`FEATURE_CATALOG.md` · `competitor-<name>.md` profiles ·

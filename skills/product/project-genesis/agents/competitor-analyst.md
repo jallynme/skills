@@ -20,7 +20,7 @@ pricing pages; app-store listings + review mining for mobile.
 **Forces these questions:** Who are the top 5 direct competitors + the substitutes (incl. "a
 spreadsheet")? What's every notable feature each has? Which features are **table-stakes** (everyone
 has them → we must too), which are **differentiators** (a few have them → pick our wedge), which are
-**delighters** (nobody has them → our leapfrog)? What do their 1–2★ reviews complain about (our
+**delighters** (nobody has them → our leapfrog)? What do their 1–2* reviews complain about (our
 opening)? How do they package & price? What did the founder miss that the market clearly expects?
 
 **Produces** (the competitor feature-list set in `V_VALIDATE/`):

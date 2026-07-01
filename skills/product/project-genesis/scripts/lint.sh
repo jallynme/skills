@@ -10,11 +10,11 @@ PROBLEMS=0
 echo "== 1) fingerprints (should be none) =="
 HITS=$(grep -rniwE 'eximpify|eximpifly|thai|customs|pdpa|declaration|tariff' \
         --include='*.md' --include='*.prisma' . | grep -v '^./dist/' || true)
-if [ -n "$HITS" ]; then echo "$HITS"; echo "  ✗ fingerprints found"; PROBLEMS=$((PROBLEMS+1)); else echo "  ✓ clean"; fi
+if [ -n "$HITS" ]; then echo "$HITS"; echo "  FAIL: fingerprints found"; PROBLEMS=$((PROBLEMS+1)); else echo "  OK: clean"; fi
 
 echo "== 2) bare PROJECT_NAME in prompts (should be wrapped <PROJECT_NAME>) =="
 BARE=$(grep -rnE '(^|[^<])PROJECT_NAME([^>]|$)' prompts/ || true)
-if [ -n "$BARE" ]; then echo "$BARE"; echo "  ✗ unwrapped placeholders"; PROBLEMS=$((PROBLEMS+1)); else echo "  ✓ consistent"; fi
+if [ -n "$BARE" ]; then echo "$BARE"; echo "  FAIL: unwrapped placeholders"; PROBLEMS=$((PROBLEMS+1)); else echo "  OK: consistent"; fi
 
 echo "== 3) relative markdown links resolve =="
 BROKEN=$(mktemp)
@@ -28,7 +28,7 @@ while IFS= read -r f; do
     [ -e "$dir/$target" ] || echo "$f → $link" >> "$BROKEN"
   done
 done < <(find . -name '*.md' -not -path './dist/*')
-if [ -s "$BROKEN" ]; then cat "$BROKEN"; echo "  ✗ broken links"; PROBLEMS=$((PROBLEMS+1)); else echo "  ✓ all links resolve"; fi
+if [ -s "$BROKEN" ]; then cat "$BROKEN"; echo "  FAIL: broken links"; PROBLEMS=$((PROBLEMS+1)); else echo "  OK: all links resolve"; fi
 rm -f "$BROKEN"
 
 echo "== 4) roster agent files exist =="
@@ -36,8 +36,8 @@ MISS=0
 for a in $(grep -oE '`[a-z-]+\.md`' agents/ROSTER.md | tr -d '`' | sort -u); do
   [ -f "agents/$a" ] || { echo "  missing agents/$a"; MISS=$((MISS+1)); }
 done
-if [ "$MISS" -gt 0 ]; then echo "  ✗ $MISS missing"; PROBLEMS=$((PROBLEMS+1)); else echo "  ✓ all present"; fi
+if [ "$MISS" -gt 0 ]; then echo "  FAIL: $MISS missing"; PROBLEMS=$((PROBLEMS+1)); else echo "  OK: all present"; fi
 
 echo "----"
 if [ "$PROBLEMS" -eq 0 ]; then echo "✅ LINT PASS — kit is clean."; exit 0
-else echo "❌ LINT: $PROBLEMS problem group(s)."; exit 1; fi
+else echo "FAIL LINT: $PROBLEMS problem group(s)."; exit 1; fi

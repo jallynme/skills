@@ -51,7 +51,7 @@ You don't need a finished spec to begin. The **minimum input is a business domai
 features.** At **V · Feature Discovery** the **Competitor Analyst + CPO** run `deep-research`, walk
 live competitor sites/apps (Claude in Chrome), and mine app-store reviews, then hand you a
 **`FEATURE_MAP`** — every feature classified table-stakes / differentiator / delighter (Kano +
-MoSCoW), including ⭐ features you *didn't* ask for but the market clearly expects, each scoped per
+MoSCoW), including features you *didn't* ask for but the market clearly expects, each scoped per
 surface (web / mobile / admin). You **scope-lock** the v1 set; it flows into the phase plan (Station 6)
 and the backlog (Station 7). The loop is: *tell me the domain → get a researched, prioritized feature
 set to react to.*

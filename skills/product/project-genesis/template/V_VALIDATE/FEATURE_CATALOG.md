@@ -5,7 +5,7 @@
 > listings). `COMPETITOR_FEATURE_MATRIX.md` samples this into a decision; `FEATURE_MAP.md` picks the
 > scope. Keep this comprehensive (it's the inventory), not opinionated (that's the matrix's job).
 >
-> Coverage key: ✅ full · ⚠️ partial · ❌ none · ❓ unknown. Class: TS = table-stakes · D = differentiator
+> Coverage key: ✅ full · ~ partial · x none · ? unknown. Class: TS = table-stakes · D = differentiator
 > · DL = delighter. Priority: Must / Should / Could / Won't (v1).
 
 ## Capability area: <Onboarding & Accounts>
@@ -40,5 +40,5 @@
 
 ## Coverage summary
 - Total features catalogued: <n> · table-stakes: <n> · differentiators: <n> · delighters: <n>
-- **We're missing (table-stakes ❌):** <list — these are mandatory> → push to `FEATURE_MAP.md`.
+- **We're missing (table-stakes x):** <list — these are mandatory> → push to `FEATURE_MAP.md`.
 - **White space (nobody has ✅):** <list — leapfrog candidates>.

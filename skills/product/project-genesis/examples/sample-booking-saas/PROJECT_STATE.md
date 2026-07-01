@@ -2,7 +2,7 @@
 
 > The loop tracker (filled example). Single source of truth for status.
 
-**🎯 Goal (what the loop is driving toward):** Validate + scope a launch-ready MVP for solo service
+**Goal (what the loop is driving toward):** Validate + scope a launch-ready MVP for solo service
 providers; get Phase 1 to grade A.
 **Project:** Sample-Booking · **Domain:** appointment-booking SaaS (solo service providers) · **Current version:** v3 · **Updated:** 2026-06-30
 **Current grade:** A (see `_EVAL/SCORECARD.md`) · **Validate:** ✅ GO · **Launch:** ⬜ GO/HOLD

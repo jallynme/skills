@@ -15,13 +15,13 @@
 ## 2. Feature teardown
 | Feature | Calendly | Acuity | Square | Us | Class | Move | Source |
 |---|---|---|---|---|---|---|---|
-| Booking link (bio) | ✅ | ✅ | ⚠️ | ✅ | table-stakes | copy | sites |
-| Deposit-to-confirm | ⚠️ addon | ✅ | ✅ | ✅ | differentiator | leapfrog (mobile UX) | pricing pages |
-| Auto refund on attend | ❌ | ❌ | ❌ | ✅ | delighter | leapfrog (our wedge) | none have it |
+| Booking link (bio) | ✅ | ✅ | ~ | ✅ | table-stakes | copy | sites |
+| Deposit-to-confirm | ~ addon | ✅ | ✅ | ✅ | differentiator | leapfrog (mobile UX) | pricing pages |
+| Auto refund on attend | x | x | x | ✅ | delighter | leapfrog (our wedge) | none have it |
 | Reminders SMS/email | ✅ | ✅ | ✅ | ✅ | table-stakes | copy | sites |
 | Calendar sync | ✅ | ✅ | ✅ | ✅ | table-stakes | copy | sites |
-| Mobile push (new booking) | ⚠️ | ⚠️ | ✅ | ✅ | differentiator | leapfrog | app reviews |
-| Client list / rebook | ⚠️ | ✅ | ✅ | ✅ | table-stakes | copy | sites |
+| Mobile push (new booking) | ~ | ~ | ✅ | ✅ | differentiator | leapfrog | app reviews |
+| Client list / rebook | ~ | ✅ | ✅ | ✅ | table-stakes | copy | sites |
 
 ## 3. Pricing teardown
 | Competitor | Tiers | What gates upgrade | Trial |
@@ -30,15 +30,15 @@
 | Acuity | Emerging/Growing/Powerhouse | staff, features | 7-day |
 > → CFO set our price at **$19/mo flat, 0% booking fee** (undercuts per-seat + fee models).
 
-## 4. Weaknesses / openings (1–2★ reviews)
+## 4. Weaknesses / openings (1–2* reviews)
 | Competitor | Complaints | Our opening |
 |---|---|---|
-| Calendly | "no real deposits", "mobile is clunky" (3.4★) | deposit + phone-first UX |
+| Calendly | "no real deposits", "mobile is clunky" (3.4*) | deposit + phone-first UX |
 | Acuity | "overwhelming to set up" | 2-minute solo setup |
 | Square | "too much for just bookings" | booking-only, no POS baggage |
 
 ## 5. Mobile scan
-- App-store ratings: Calendly 3.4★, Square 4.6★, Acuity 3.9★. Common mobile gripe: parity gaps vs web.
+- App-store ratings: Calendly 3.4*, Square 4.6*, Acuity 3.9*. Common mobile gripe: parity gaps vs web.
 - Nobody does **auto-refund-on-attend** on mobile with one tap → our leapfrog.
 
 ## 6. Synthesis → FEATURE_MAP

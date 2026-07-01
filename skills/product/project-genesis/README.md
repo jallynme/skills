@@ -7,7 +7,7 @@ This is the generalized, reusable version of a workflow proven on a real, full-s
 Drop your docs in a folder, run the pipeline, and get the same nine artifacts every time, reviewed in
 a loop until there are no gaps or bugs — for **any** business domain.
 
-> ### ⭐ Solo-Founder / Agentic edition (S-grade)
+> ### Solo-Founder / Agentic edition (S-grade)
 > The kit now wraps the 9 product stations in a full **venture arc — Validate → Build → Monetize/
 > Launch** — staffed by a **virtual C-suite of AI agents** and graded against an explicit **A–S
 > rubric** with an adversarial **Red-Team**. If you're a solo founder running on agentic AI, start
@@ -44,17 +44,19 @@ for whatever your project is — and it joins the review panel on every future p
 ```
 project-genesis-kit/
 ├── README.md                          ← you are here
-├── SOLO_FOUNDER_AGENTIC_GUIDE.md      ← ⭐ how to run this as a solo founder + AI swarm (read first)
+├── SOLO_FOUNDER_AGENTIC_GUIDE.md      ← how to run this as a solo founder + AI swarm (read first)
 ├── PROJECT_GENESIS_PLAYBOOK.md        ← the full process spec: stations, gates, RACI, the loop, anti-patterns
 ├── GRADE_RUBRIC.md                    ← what "Grade S" means + the A–S scoring dimensions
-├── LOOP_ENGINEERING.md                ← ⭐ the ReAct + Goal-Loop execution substrate (how it runs)
+├── LOOP_ENGINEERING.md                ← the ReAct + Goal-Loop execution substrate (how it runs)
+├── COMPANION_SKILLS.md                ← external skill packs the swarm calls (spec-kit, superpowers, graphify, …) + where each is used
 ├── UPGRADES.md                        ← review of the kit + prioritized upgrade backlog (Now/Next/Later)
 ├── agents/                            ← the virtual C-suite (one brief per agent)
 │   ├── ROSTER.md                      ← index + dispatch map (station → which agents) + how to spawn
 │   ├── orchestrator-chief-of-staff.md ← runs the loop, dispatches the swarm
 │   ├── red-team-devils-advocate.md    ← paid to kill the idea (hits every gate)
 │   ├── competitor-analyst.md          ← feature teardown · copycat-done-right · suggests features (lean start)
-│   └── cfo · cmo · cpo · cto · counsel · data · qa · sales · design · people
+│   ├── cfo · cmo · cpo · cto · counsel · data · qa · sales · design · people
+│   └── security-engineer · devops-sre · ai-ml-engineer · tech-writer-docs · customer-success  ← build & launch specialists
 ├── skills/
 │   └── project-genesis/SKILL.md       ← the orchestrator skill (install this — it runs the whole pipeline)
 ├── prompts/
@@ -63,18 +65,18 @@ project-genesis-kit/
 │   └── RELOOP_PROMPT.md               ← the "review & iterate until clean" engine
 ├── template/                          ← copy this into each new PROJECT_NAME/
 │   ├── CLAUDE.md                      ← per-project context + rules
-│   ├── PROJECT_STATE.md               ← the loop tracker (status · version · gaps · score · 🎯 goal · trace)
-│   ├── V_VALIDATE/                    ← ⭐ validate + competitor set (catalog·profiles·benchmark·matrix) + feature map
+│   ├── PROJECT_STATE.md               ← the loop tracker (status · version · gaps · score · goal · trace)
+│   ├── V_VALIDATE/                    ← validate + competitor set (catalog·profiles·benchmark·matrix) + feature map
 │   ├── 00_INTAKE/ … 09_SPECIALIST/    ← one folder per build station, each with its template
-│   ├── 05_WIREFRAMES/_starter.html    ← ⭐ 1-page HTML wireframe starter (Tailwind + shadcn tokens, no React/TS)
+│   ├── 05_WIREFRAMES/_starter.html    ← 1-page HTML wireframe starter (Tailwind + shadcn tokens, no React/TS)
 │   ├── 07_BACKLOG/TEMPLATE.md         ← the 10-section story-card template
 │   ├── 08_REVIEW/REDTEAM_PREMORTEM.md ← the red-team / pre-mortem log
-│   ├── E_EXEC_SUMMARY/                ← ⭐ CEO one-pager (HTML): story · KPIs · roadmap · status · diagram
-│   ├── M_MONETIZE/                    ← ⭐ GTM + financial model + metrics tree (the LAUNCH gate)
+│   ├── E_EXEC_SUMMARY/                ← CEO one-pager (HTML): story · KPIs · roadmap · status · diagram
+│   ├── M_MONETIZE/                    ← GTM + financial model + metrics tree (the LAUNCH gate)
 │   ├── _EVAL/SCORECARD.md             ← A–S scores per round (the trend should climb)
-│   └── _EVAL/dashboard.html           ← ⭐ open in a browser: live loop dashboard from PROJECT_STATE
+│   └── _EVAL/dashboard.html           ← open in a browser: live loop dashboard from PROJECT_STATE
 ├── scripts/                          ← bootstrap.sh (scaffold a project) · package.sh · lint.sh
-├── examples/sample-booking-saas/     ← ⭐ a filled worked example (what "good" looks like)
+├── examples/sample-booking-saas/     ← a filled worked example (what "good" looks like)
 └── dist/                             ← built: project-genesis.skill (install) + project-genesis-kit.zip
 ```
 

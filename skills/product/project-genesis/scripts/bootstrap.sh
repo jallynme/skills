@@ -11,7 +11,7 @@ TARGET="${2:-$PWD}"
 DEST="$TARGET/$NAME"
 
 if [ -e "$DEST" ]; then
-  echo "✋ $DEST already exists — choose another name or remove it first."; exit 1
+  echo "$DEST already exists — choose another name or remove it first."; exit 1
 fi
 
 cp -R "$KIT_ROOT/template" "$DEST"

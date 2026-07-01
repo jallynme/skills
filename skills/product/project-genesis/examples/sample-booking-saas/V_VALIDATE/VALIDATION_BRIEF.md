@@ -47,6 +47,6 @@
 
 ## 8. Go / No-Go decision (Founder)
 - **Red-Team's strongest challenge:** "Calendly adds deposits and crushes you." **Answer:** their core
-  is teams/scheduling; deposits are a checkbox, not phone-first UX — and their mobile is 3.4★. We win on
+  is teams/scheduling; deposits are a checkbox, not phone-first UX — and their mobile is 3.4*. We win on
   the solo+mobile+deposit wedge, not on calendars.
 - **Decision:** ✅ **GO** — 2026-06-28 — riskiest assumptions tested with real signal; wedge is defensible.

@@ -34,10 +34,10 @@
 ## Strengths (what they do well)
 - <…>
 
-## Weaknesses & complaints (mine the 1–2★ reviews — verbatim themes)
+## Weaknesses & complaints (mine the 1–2* reviews — verbatim themes)
 | Theme | Frequency | Their rating | Our opening |
 |---|---|---|---|
-| <"too slow" / "no X" / "bad mobile" / "pricey"> | <high/med> | <App Store 3.4★> | <how we win here> |
+| <"too slow" / "no X" / "bad mobile" / "pricey"> | <high/med> | <App Store 3.4*> | <how we win here> |
 
 ## UX & onboarding notes
 - Time-to-value: <…> · friction points: <…> · standout patterns to learn from: <…>

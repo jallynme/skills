@@ -13,7 +13,7 @@ for solo service providers, and get Phase 1 to grade A."*
 |---|---|---|
 | — | `PROJECT_STATE.md` · `CLAUDE.md` | loop tracker (goal · status · gap · grade · loop-trace) + project context |
 | **V** | `V_VALIDATE/VALIDATION_BRIEF.md` · `ASSUMPTION_REGISTER.md` | problem→market→pricing→**GO**; 5 assumptions with tests |
-| **V·Feature Discovery** | `COMPETITOR_FEATURE_MATRIX.md` · `FEATURE_CATALOG.md` · `FEATURE_MAP.md` | competitor teardown, 17-feature catalog, scope-lock with ⭐ suggestions |
+| **V·Feature Discovery** | `COMPETITOR_FEATURE_MATRIX.md` · `FEATURE_CATALOG.md` · `FEATURE_MAP.md` | competitor teardown, 17-feature catalog, scope-lock with suggestions |
 | 1 | `01_KNOWLEDGE/KNOWLEDGE_INDEX.md` | extracted knowledge + a doc contradiction |
 | 2 | `02_DIAGRAMS/{context,flows,state,erd}.md` | context, sequence flows, **state machine**, ERD (Mermaid) |
 | 3 | `03_DICTIONARY/DOMAIN_DICTIONARY.md` | the naming authority |

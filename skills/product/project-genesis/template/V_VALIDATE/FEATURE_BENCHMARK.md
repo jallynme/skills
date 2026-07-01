@@ -1,6 +1,6 @@
 # Feature Benchmark — <PROJECT_NAME>  (quality scoring, not just presence)
 
-> Presence (✅/❌) lives in `FEATURE_CATALOG.md`. This file scores **how *good* each feature is**,
+> Presence (✅/x) lives in `FEATURE_CATALOG.md`. This file scores **how *good* each feature is**,
 > 0–5, per competitor — because the biggest opportunity is usually a feature **everyone has but
 > nobody does well.** Owned by the **Competitor Analyst + Head of Design** (UX quality).
 >

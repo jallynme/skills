@@ -4,7 +4,7 @@
 > status, the cheapest test to settle it, and what the result was. The **Red-Team** attacks the
 > riskiest *unvalidated* one first. An assumption with no test is just a hope.
 
-**Legend — status:** 🔴 unvalidated · 🟡 testing · 🟢 validated · ⚫ invalidated (→ pivot/kill)
+**Legend — status:** 🔴 unvalidated · 🟡 testing · 🟢 validated · X invalidated (→ pivot/kill)
 **Legend — type:** Desirability (do they want it?) · Viability (does the money work?) · Feasibility
 (can we build it?) · Legal (are we allowed?)
 
@@ -20,5 +20,5 @@
 - Open High assumptions: <n> → drive this to **0** before/at the Validate gate.
 - Validated this round: <list> · Invalidated (forced a pivot): <list>
 
-> Mirror High items into the risk register and `PROJECT_STATE.md`. When an assumption flips to ⚫,
+> Mirror High items into the risk register and `PROJECT_STATE.md`. When an assumption flips to X,
 > that's not failure — it's the cheapest win in the whole process: you didn't build it.

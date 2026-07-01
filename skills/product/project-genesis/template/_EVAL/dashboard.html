@@ -42,10 +42,10 @@
 </head>
 <body>
 <div class="wrap">
-  <h1>🧭 Project Genesis — Loop Dashboard</h1>
+  <h1>Project Genesis — Loop Dashboard</h1>
   <div class="sub">Paste your <code>PROJECT_STATE.md</code> below and hit Refresh. Self-contained — open in any browser. (Preloaded with the worked-example state.)</div>
 
-  <div class="goal"><div class="g">🎯 Goal<br><b id="goal">—</b></div><div class="grade" id="gradeBig">—</div></div>
+  <div class="goal"><div class="g">Goal<br><b id="goal">—</b></div><div class="grade" id="gradeBig">—</div></div>
 
   <div class="cards" id="cards"></div>
 
@@ -69,7 +69,7 @@
 
 <script>
 const SAMPLE = String.raw`# PROJECT_STATE — Sample-Booking
-**🎯 Goal (what the loop is driving toward):** Validate + scope a launch-ready MVP for solo service providers; get Phase 1 to grade A.
+**Goal (what the loop is driving toward):** Validate + scope a launch-ready MVP for solo service providers; get Phase 1 to grade A.
 **Project:** Sample-Booking · **Domain:** appointment-booking SaaS · **Current version:** v3 · **Updated:** 2026-06-30
 **Current grade:** A (see _EVAL/SCORECARD.md) · **Validate:** GO · **Launch:** GO/HOLD
 
@@ -133,7 +133,7 @@ function gradeColor(g){g=(g||"").trim();const n=GRADEN[g]??(GRADEN[g[0]]??0);
 
 function parse(t){
   const m = {};
-  m.goal = (t.match(/Goal\s*\(what the loop[^)]*\):\*\*\s*(.+)/i)||t.match(/🎯[^\n]*?:\*\*\s*(.+)/)||[])[1] || "—";
+  m.goal = (t.match(/Goal\s*\(what the loop[^)]*\):\*\*\s*(.+)/i)||[])[1] || "—";
   m.grade = (t.match(/Current grade:\*\*\s*([A-FS][+-]?)/i)||[])[1] || "—";
   // stations
   const st = rows(section(t,"Station status")).filter(r=>!/^#$/.test(r[0]) && r[1] && !/^Station$/i.test(r[1]));
@@ -167,7 +167,7 @@ function render(m){
     ["Stations gate-met", `${done}/${tot}`, `<div style="height:6px;background:#11151c;border-radius:4px;margin-top:8px"><div style="height:6px;border-radius:4px;background:var(--grn);width:${tot?done/tot*100:0}%"></div></div>`],
     ["Open gaps", `${openH+openM+openL}`, `<span class="pill" style="background:#3a1416;color:#f85149">${openH} High</span><span class="pill" style="background:#3a2c10;color:#d29922">${openM} Med</span><span class="pill" style="background:#1b2330;color:#9aa3b2">${openL} Low</span>`],
     ["Current grade", m.grade, `<div style="color:var(--mut);font-size:12px;margin-top:6px">target: A to advance · S to launch</div>`],
-    ["Round clean?", clean?"✅ yes":"⛔ no", `<div style="color:var(--mut);font-size:12px;margin-top:6px">zero High/Med open</div>`],
+    ["Round clean?", clean?"✅ yes":"no", `<div style="color:var(--mut);font-size:12px;margin-top:6px">zero High/Med open</div>`],
   ].map(c=>`<div class="card"><div class="k">${c[0]}</div><div class="v" style="${c[0]=='Current grade'?'color:'+gradeColor(m.grade):''}">${c[1]}</div>${c[2]||""}</div>`).join("");
   // stations chips
   $("#stations").innerHTML = m.stations.map(s=>{const[c,t]=statusDot(s.status);
@@ -176,7 +176,7 @@ function render(m){
   const og=m.gaps.filter(g=>g.status.includes("open"));
   $("#gapTable").innerHTML = og.length? "<tr><th>ID</th><th>Station</th><th>Sev</th><th>Description</th></tr>"+
     og.map(g=>`<tr><td>${g.id}</td><td>${g.station}</td><td class="sev-${g.sev}">${g.sev}</td><td>${g.desc||""}</td></tr>`).join("")
-    : "<tr><td style='color:var(--mut)'>No open gaps 🎉</td></tr>";
+    : "<tr><td style='color:var(--mut)'>No open gaps</td></tr>";
   $("#trace").textContent = m.trace;
   drawCharts(m);
 }

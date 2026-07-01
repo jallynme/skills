@@ -26,9 +26,9 @@ Chrome) + app-store listings & reviews. Produce:
   - V_VALIDATE/competitor-<name>.md — one deep profile per rival (from COMPETITOR_PROFILE_TEMPLATE.md).
   - V_VALIDATE/FEATURE_BENCHMARK.md — a 0–5 quality score per feature (depth, not presence → leapfrog spots).
   - V_VALIDATE/COMPETITOR_FEATURE_MATRIX.md — top 5 competitors + substitutes, a feature teardown
-    matrix, pricing/packaging, and 1–2★ review complaints (our openings).
+    matrix, pricing/packaging, and 1–2* review complaints (our openings).
   - V_VALIDATE/FEATURE_MAP.md — every feature classified table-stakes / differentiator / delighter
-    (Kano + MoSCoW), with ⭐ features I DIDN'T mention but the market expects (each with evidence),
+    (Kano + MoSCoW), with features I DIDN'T mention but the market expects (each with evidence),
     scoped per surface (web / mobile / admin), and a proposed v1 scope.
 Copy common patterns & table-stakes; never clone protected IP/brand (flag for Counsel). Red-Team
 challenges scope creep.

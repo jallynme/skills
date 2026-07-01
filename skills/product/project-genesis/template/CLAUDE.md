@@ -50,7 +50,7 @@ each backed by an installed plugin. Operating model: `../SOLO_FOUNDER_AGENTIC_GU
 
 ## 3. How to work
 - Run the **Goal Loop** (Review & Learn → Trigger → Investigate → Act → Backlog → Assign → loop) on
-  ReAct turns toward the **🎯 Goal** at the top of `PROJECT_STATE.md`; log a trace line per turn
+  ReAct turns toward the **Goal** at the top of `PROJECT_STATE.md`; log a trace line per turn
   (`../LOOP_ENGINEERING.md`). Pause only at founder gates.
 - Pick the next move from `PROJECT_STATE.md` (next slice, or the highest open gap).
 - Re-enter the pipeline at the **lowest affected station** and run forward; then **Station 8 review**.

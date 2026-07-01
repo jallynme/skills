@@ -31,7 +31,7 @@ CPO ✅ · Specialist ✅ · CTO ✅ · QA ⬜ (tz) · CFO ✅ · CMO ✅ · Cou
 |---|---|---|---|---|---|---|
 | R2-01 | Design | Med | 05_WIREFRAMES | mobile booking has no offline/confirmation state | add states (G-003) | **open** |
 
-### Red-Team — no new High; prior challenge answered (benchmark shows Calendly mobile 3.4★).
+### Red-Team — no new High; prior challenge answered (benchmark shows Calendly mobile 3.4*).
 
 ### Regression baseline — 🟢 green; added tz + refund-window cases so they can't return.
 

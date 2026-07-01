@@ -25,4 +25,4 @@ authority) · `04_DATA_MODEL/schema.prisma` (11 models) · `05_WIREFRAMES` · `0
 5. Domain specialist (`booking-ops-specialist`) signs off anything touching deposits/refunds/policy.
 
 ## Loop
-Run the Goal Loop toward the 🎯 goal in `PROJECT_STATE.md` (get Phase 1 to a clean grade A → close G-003).
+Run the Goal Loop toward the goal in `PROJECT_STATE.md` (get Phase 1 to a clean grade A → close G-003).

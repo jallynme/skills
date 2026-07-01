@@ -4,7 +4,7 @@
 > review round. This is what makes the workflow repeatable: anyone (or any session) can read this
 > and know exactly where the project is and what to do next.
 
-**🎯 Goal (what the loop is driving toward):** <the founder's goal prompt — a high-level outcome>
+**Goal (what the loop is driving toward):** <the founder's goal prompt — a high-level outcome>
 **Project:** <PROJECT_NAME> · **Domain:** <one line> · **Current version:** v0 · **Updated:** <date>
 **Current grade:** <S/A/B/C/D — see `_EVAL/SCORECARD.md`> · **Validate:** ⬜ GO/NO-GO · **Launch:** ⬜ GO/HOLD
 

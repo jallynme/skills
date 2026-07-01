@@ -14,14 +14,14 @@
 ## 2. Researched + suggested features (the swarm's proposal)
 > Classified by **Kano** (Basic = table-stakes, Performance = more-is-better, Delighter = wow) and
 > **MoSCoW** for this build. "Source" = competitor/review/research evidence (no opinion-only rows).
-> ⭐ = the swarm is *suggesting* this; you didn't ask for it.
+> = the swarm is *suggesting* this; you didn't ask for it.
 
 | Feature | From | Kano | MoSCoW (v1) | Surface (Web / Mobile / Admin) | Effort | Why / evidence | Decision |
 |---|---|---|---|---|---|---|---|
 | <core action> | founder | Performance | Must | Web + Mobile | M | the wedge | ⬜ in / ⬜ out |
 | <auth/SSO> | competitors | Basic | Must | all | S | table-stakes | ⬜ |
-| ⭐ <thing you didn't mention> | research | Basic | Must | Web | M | market expects it | ⬜ |
-| ⭐ <differentiator idea> | reviews of C2 | Delighter | Should | Mobile | L | their #1 complaint | ⬜ |
+| <thing you didn't mention> | research | Basic | Must | Web | M | market expects it | ⬜ |
+| <differentiator idea> | reviews of C2 | Delighter | Should | Mobile | L | their #1 complaint | ⬜ |
 | <nice-to-have> | competitor | Performance | Could | Web | M | parity later | ⬜ |
 | <out-of-scope-for-now> | founder | — | Won't (v1) | — | — | defer | ⬜ |
 
