@@ -59,3 +59,34 @@ These are illustrative only, not a mandatory fixed sequence.
 
 ## FORGE handoff
 No engineering dispatch for a slice until the convergence gate is met and approved. Ready slices can be handed off while other slices remain under research, with dependencies enforced by the Controller.
+
+
+## Mandatory domain specialist from the first review
+Before the first substantive review, load an existing domain-specialist skill or generate a **provisional** specialist from authoritative sources, known terminology, jurisdiction, and source-linked rules. Do not wait for Station 9. The provisional specialist must maintain a knowledge/evidence ledger and explicit unknowns. At Station 9, consolidate and version the specialist from the reviewed artifacts. Never present model role-play as certified professional advice.
+
+Every review round requires an independent domain-specialist assessment with recorded findings, citations, and sign-off status. If specialist evidence is inadequate, mark `BLOCKED_DOMAIN_EVIDENCE` and research or escalate rather than approving.
+
+## Mandatory fix-and-score transaction for each review round
+A round is not complete merely because reviewers reported issues. Execute this transaction:
+1. Capture a baseline snapshot and rubric score for the approved scope; freeze scoring weights and denominators for the round.
+2. Discover, deduplicate, classify and assign findings, including new contradictions introduced by fixes.
+3. Produce a remediation plan for **every actionable finding**. Critical/high findings must be fixed and verified before advancement; medium/low findings must be fixed or explicitly deferred with rationale, owner and deadline. Do not silently mark findings resolved.
+4. Apply changes to the source artifact and all impacted downstream artifacts; update stories, cards, domain specialist and tests as needed.
+5. Independently verify each closure against concrete evidence; run regression and traceability checks. Only then set `resolved_verified`.
+6. Re-score all rubric dimensions using the same evidence-based rubric, record previous/current/delta, and attach evidence links.
+7. Mark `ROUND_ACCEPTED` only when verified remediation made measurable progress, no new critical/high regression remains, and the comparable weighted score increased OR the verified weighted gap debt decreased without score regression.
+8. If score falls or debt increases because genuine new evidence reveals hidden risk, mark `ROUND_REWORK`, preserve the honest score, fix the newly exposed gaps, and repeat. Never inflate scores or delete findings to manufacture improvement.
+9. If neither score nor verified gap debt improves, mark `STALLED`; switch reviewer, research source, or scope decomposition and escalate according to loop guardrails.
+
+A score can legitimately decline after discovering new evidence. The **accepted-round trend** should improve; the raw score history must remain immutable. Do not promise monotonic scores by manipulating the rubric.
+
+### Scorecard contract
+Record in `08_REVIEW/ROUND_SCORECARD.json` per round: `round_id`, `scope_version`, `rubric_version`, `domain_specialist_version`, `score_before`, `score_after`, `score_delta`, `weighted_gap_debt_before`, `weighted_gap_debt_after`, `findings_new`, `findings_verified_closed`, `findings_reopened`, `regressions`, `evidence_links`, `specialist_signoff`, and `decision`. Preserve history across rounds.
+
+Use stable severity weights (critical=8, high=5, medium=2, low=1) for **gap debt**, counting all unresolved findings. Changes to severity or scope require justification and a separately reported normalized comparison. Rubric scores are not substitutes for coverage, evidence or human approval.
+
+### Review ownership
+Author/implementer fixes; domain specialist validates domain semantics; architect validates data and cross-module invariants; QA verifies executable AC/test coverage; Red-Team challenges closure; controller records the transaction. One model playing multiple personas is not independent verification.
+
+### Completion gate additions
+Require a versioned specialist skill, domain-specialist signoff with evidence, no unresolved critical/high findings, closure evidence for every resolved finding, no critical regression, complete required story-card fields, traceability and deterministic checks, and two consecutive clean independent review rounds. Medium/low exceptions need documented founder approval before engineering handoff.
