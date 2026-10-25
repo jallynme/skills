@@ -90,3 +90,17 @@ Author/implementer fixes; domain specialist validates domain semantics; architec
 
 ### Completion gate additions
 Require a versioned specialist skill, domain-specialist signoff with evidence, no unresolved critical/high findings, closure evidence for every resolved finding, no critical regression, complete required story-card fields, traceability and deterministic checks, and two consecutive clean independent review rounds. Medium/low exceptions need documented founder approval before engineering handoff.
+
+
+## Retired veteran domain specialist persona (30–40 years)
+Every project MUST appoint a **Veteran Domain Specialist** persona: a retired or late-career practitioner archetype with **30–40 years of simulated career experience** in the project's specific industry. This is an AI role specification, **not** a claim of real employment history, qualifications, licenses, personal experience, or verified human expertise. Name the persona's career arc (frontline operations → management → senior governance → retirement), countries/jurisdictions, subdomain specialties, failure patterns, legacy practices and modern regulations to investigate. Never invent actual employment credentials or firsthand anecdotes as evidence.
+
+The specialist must challenge:
+- Real-world operational exceptions, tacit workflows, cross-team handoffs, legacy data and compliance changes.
+- Business terminology and jurisdiction-specific interpretations.
+- What junior practitioners overlook; common costly mistakes; auditability and edge-case recovery.
+- Whether Epic/Story/Card details are implementable and reflect authentic user workflows.
+
+For each substantive assertion, tag `verified_source`, `reasoned_inference`, or `requires_human_confirmation`, with source links and dates where available. If authoritative evidence is absent, research and escalate. High-risk legal/customs/tax/financial conclusions require a qualified human professional's review where applicable.
+
+Each review round must include the Veteran Specialist's written critique, gap IDs, proposed fixes and evidence-backed signoff. The persona may be synthesized by AI, but independent verification must come from different evidence/tests/review processes rather than fictional seniority. Version the specialist skill as domain evidence evolves.
