@@ -18,6 +18,10 @@ to configure your issue tracker, doc locations, and whether to install the Claud
 Starting a new product? **`/genesis-init <name>`** scaffolds the project, then **`/genesis-interview`**
 turns a one-line idea into a researched, scoped plan (deep research + competitor teardown, done for you).
 
+## SOLID Genesis (research-to-engineering)
+
+[**SOLID Genesis**](./skills/product/solid-genesis/SKILL.md) adds research-first targeted grilling and a FORGE engineering handoff on top of Project Genesis. It preserves the original nine stations and founder/Red-Team gates. Run `/genesis-init`, `/genesis-interview`, then `/solid-genesis` after installing the skill. See its [handoff contract](./skills/product/solid-genesis/references/FORGE_HANDOFF.md).
+
 ## What's inside
 
 | Skill | Category | What it does |
